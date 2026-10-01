@@ -18,7 +18,7 @@ import Admin from "./pages/Admin";
 import { PaymentSuccess, PaymentCancel } from "./pages/Payment";
 
 const Layout = () => (
-  <div className="grain min-h-screen bg-[#0D0B08] text-[#F2EADB]">
+  <div className="grain relative min-h-screen bg-[#0D0B08] text-[#F2EADB]">
     <SmoothScroll />
     <Navbar />
     <main>

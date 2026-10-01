@@ -127,13 +127,13 @@ async def root():
     return {"message": "Renegade Hats API"}
 
 
-@api.get("/products", response_model=List[Product])
+@api.get("/products", response_model=List[Product], response_model_by_alias=False)
 async def list_products():
     docs = await db.products.find().sort("order", 1).to_list(200)
     return [Product.from_mongo(d) for d in docs]
 
 
-@api.get("/products/{slug}", response_model=Product)
+@api.get("/products/{slug}", response_model=Product, response_model_by_alias=False)
 async def get_product(slug: str):
     doc = await db.products.find_one({"slug": slug})
     if not doc:

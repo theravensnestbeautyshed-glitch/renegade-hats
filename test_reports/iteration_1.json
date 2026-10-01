@@ -1,0 +1,34 @@
+{
+  "summary": "First test iteration for RENÉGADE HATS. Backend: 14/15 pytest tests passed (only _id leak in /api/products). Frontend: full user journeys verified end-to-end — home hero + 6 featured hats with CAD prices, shop grid, cart drawer add/remove/subtotal, checkout button redirects to checkout.stripe.com, product thumbnails, product -> custom inquiry preselects base hat (The Outlaw), custom form success, contact form success, FAQ accordion opens, gallery lightbox opens, admin login + toggle sold shows SOLD OUT badge and disables Add-to-Cart on shop card (reset afterwards). Mobile 390px: no horizontal overflow on any page; mobile toggle opens menu. The admin sold-toggle for a hat marked via API during checkout 409 test was also reset.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "GET /api/products and /api/products/{slug}", "issue": "Response includes MongoDB '_id' field (as stringified ObjectId). The Product model uses alias='_id' for its id field, so FastAPI serializes by alias and exposes '_id'. Per guidelines, _id should be excluded or exposed only as 'id'. Fix: set response serialization to by_alias=False or add Field(exclude=True) via computed field; alternatively drop the alias and project {_id:0} from the Mongo query."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Global", "issues": ["Console warning from Lenis: 'Please ensure that the container has a non-static position (relative/fixed/absolute) to ensure scroll offset is calculated correctly'. Non-blocking."]}
+    ]
+  },
+  "test_report_links": ["/app/backend/tests/backend_test.py", "/app/test_reports/pytest/pytest_results.xml"],
+  "action_items": [
+    "Exclude MongoDB '_id' from /api/products responses (either project {_id:0} on the Mongo query, or stop using alias='_id' for the id field, or set response_model serialization to not use alias)."
+  ],
+  "critical_code_review_comments": [
+    "Product/BaseDocument uses alias='_id' which causes FastAPI to leak Mongo _id in API responses. Prefer excluding _id from Mongo projection or renaming the field without alias.",
+    "The problem statement reference mentioned product pages at /product/{slug} but the actual route is /shop/{slug}. Not a bug (consistent with the Link usage in Shop.js), but worth noting for external links/sitemaps.",
+    "Mobile nav links use testids 'mobile-nav-{id}-link' while desktop uses 'nav-{id}-link'. Agent-context note mentioned only 'nav-{...}-link'. Documentation nit; both are present and functional.",
+    "stripe.Price.list(lookup_keys=['hat_{slug}']) is called per slug on each checkout — can hit rate limits for larger carts and is slow. Consider caching mapping slug->price_id or inlining price_data for one-of-a-kind SKUs."
+  ],
+  "updated_files": ["/app/backend/tests/backend_test.py"],
+  "success_rate": {"backend": "93% (14/15)", "frontend": "100% of flows tested"},
+  "test_credentials": "Admin passcode: renegade2026 (confirmed working)",
+  "seed_data_creation": "Created TEST_ prefixed custom-requests and contact messages. Payment session was created against Stripe but not completed; one Transaction row with payment_status='pending' remains in payment_transactions.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Pytest file at /app/backend/tests/backend_test.py covers products, custom-requests, contact, payments (checkout + 409 sold + status), admin auth + toggle. Product route is /shop/{slug} not /product/{slug}. Mobile nav links use testid 'mobile-nav-{id}-link'. All admin sold toggles were reset to false after each test (verified via GET).",
+  "rca of the issue": "MongoDB _id leak: In server.py BaseDocument defines `id: Optional[PyObjectId] = Field(default=None, alias='_id')` with ConfigDict(populate_by_name=True). FastAPI's response_model serialization emits the alias when the field value is populated from the Mongo document, producing a '_id' key in JSON. Reproduction: curl $BACKEND/api/products | jq '.[0] | keys' → includes '_id'. Mitigation (any): (a) query with projection {_id:0}; (b) drop alias and use PyObjectId without '_id' alias; (c) set FastAPI endpoint response_model_exclude={'id'}; (d) override to_mongo/from_mongo to pop _id."
+}
