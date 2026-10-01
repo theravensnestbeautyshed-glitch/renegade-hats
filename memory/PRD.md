@@ -14,6 +14,8 @@ Premium e-commerce website for handmade hat brand RENÉGADE HATS — one-of-a-ki
 - 2026-10-01: Redesign to reference image (header, hero, featured hats, promo panels, footer, privacy page, search, favourites, newsletter)
 - 2026-10-01: Mobile hero refinements; new Shop page (One of a Kind badges, subtitles, "There's Only One" section)
 - 2026-10-01: Removed all custom-order content (page, routes, CTAs, FAQ items, admin tab, API); socials limited to Instagram + Facebook
+- 2026-10-01: Individual Hat page template (/shop/:slug, data-driven): swipe gallery, One of a Kind badge, No. XX · One of One, CLAIM THIS RENEGADE, SOLD state, Story Behind the Hat, details table (size/material/colour/hatband/details/handmade), More Renegade Hats, back links. Nav = Home/Shop/About/Gallery/Contact/FAQ. Iteration 4 tests all pass.
+- To add a hat: add an entry to backend/catalog.py HATS (slug, name, price, order, subtitle, tagline, story, size, material, colour, hatband, handmade, description, details, images) then run setup_stripe.py and restart backend
 - Tests: iteration 3 — backend 16/16, frontend all flows pass
 
 ## Notes
