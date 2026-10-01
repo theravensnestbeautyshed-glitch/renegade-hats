@@ -1,0 +1,168 @@
+{
+  "project_name": "Renegade Hats",
+  "app_type": "E-Commerce Brand Storefront (Awwwards-Level Outlaw Western)",
+  "emotional_tone": "Dark Outlaw Western, Rebellious Craftsmanship, Moody Luxury, Distressed Leather & Raw Antiquity",
+  "theme": "Dark Theme Primary (#0D0A08 base with aged leather, copper, bronze, and distressed cream typography)",
+  "typography": {
+    "headline_font": "Cinzel / Playfair Display / Rye (Serif with Western / High-End Rebel Character)",
+    "subheading_font": "Space Grotesk / Cabinet Grotesk (Sharp Architectural Contrast)",
+    "body_font": "DM Sans / Inter (High Legibility Neutral Dark)",
+    "mono_font": "JetBrains Mono / Courier Prime (Custom serial tags, hat sizing, pricing badges)",
+    "hierarchy": {
+      "h1_hero": "text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-[0.95]",
+      "h2_section": "text-2xl sm:text-3xl lg:text-4xl font-bold uppercase tracking-tight",
+      "h3_card": "text-xl sm:text-2xl font-serif font-semibold tracking-normal",
+      "h4_widget": "text-lg font-mono font-medium tracking-wide uppercase text-amber-500/90",
+      "body": "text-base sm:text-sm text-stone-300 leading-relaxed",
+      "caption_overline": "text-xs font-mono uppercase tracking-[0.25em] text-amber-600/80"
+    }
+  },
+  "colors": {
+    "background_base": "#0D0B08",
+    "background_card": "#16120E",
+    "background_elevated": "#1E1813",
+    "border_subtle": "rgba(184, 115, 51, 0.18)",
+    "border_highlight": "rgba(217, 119, 6, 0.45)",
+    "primary_copper": "#C87D53",
+    "accent_bronze": "#B87333",
+    "accent_aged_gold": "#D97706",
+    "text_cream": "#F5EFE6",
+    "text_muted": "#A3978C",
+    "text_distressed": "#786C60",
+    "badge_sold": "#7F1D1D",
+    "badge_available": "#065F46"
+  },
+  "visual_enhancers": {
+    "textures": "Grain overlay, distressed leather subtle pattern, micro copper glow, clipped frame corners, subtle smoke parallax",
+    "marquee": "Slow editorial text marquee with low contrast copper/cream text: 'HANDMADE • ONE OF ONE • BOLD & UNTAMED • CUSTOM FEATHER & SKULL DETAILS'",
+    "glassmorphism": "backdrop-blur-xl bg-[#0D0B08]/85 border border-[#B87333]/20 shadow-2xl",
+    "hero_treatment": "Masked line-by-line kinetic title reveal, mouse-tilt 3D depth hat interaction, distressed stamp watermark"
+  },
+  "layout_and_grids": {
+    "hero": "Full screen cinematic dark hero with background video/photography blend, title kinetic reveal, dual primary CTA (Shop 1-of-1s / Request Custom)",
+    "shop_grid": "3-column / 2-column bento card grid with clipped corner frames, leather texture cards, live availability indicator, 'Claim This Hat' instant Stripe trigger",
+    "custom_hat_form": "Multi-step interactive studio builder (Style, Crown shape, Brim size, Color patina, Skull/Feather accents, Sizing, Budget, Custom Branding)",
+    "gallery": "Masonry gallery with lightbox modal, filter tags (Featured, Custom Builds, Stage Wear, Archived)",
+    "story": "Editorial split scrollytelling with archival workshop imagery, artisan craftsmanship manifesto",
+    "mobile_spec": "390px responsive perfection with sticky dynamic copper bar action"
+  },
+  "products_data": [
+    {
+      "id": "renegade-01",
+      "name": "The Renegade",
+      "price": 249,
+      "status": "Available",
+      "edition": "1-of-1 Original",
+      "description": "Distressed dark charcoal felt, vintage copper band with silver skull rivet and hand-burned brim edge.",
+      "image_url": "https://images.unsplash.com/photo-1763095548056-4009d387cb29?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "details": ["100% Beaver Felt", "Hand-distressed patina", "Silver skull rivet", "Rooster feather detail"]
+    },
+    {
+      "id": "renegade-02",
+      "name": "Midnight Renegade",
+      "price": 249,
+      "status": "Available",
+      "edition": "1-of-1 Original",
+      "description": "Deep obsidian black wool felt with charred brim patina, hand-stitched leather wrap and antique feather attachment.",
+      "image_url": "https://images.unsplash.com/photo-1626641559491-3272157ca687?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "details": ["Charcoal Wool Felt", "Burned edge finish", "Custom leather cord", "Antique bronze pin"]
+    },
+    {
+      "id": "renegade-03",
+      "name": "Renegade Red",
+      "price": 275,
+      "status": "Available",
+      "edition": "1-of-1 Original",
+      "description": "Earthy crimson-tinted felt with distressed tan leather band, brass skull coin inlay, and natural pheasant quill.",
+      "image_url": "https://images.unsplash.com/photo-1785088560849-55fab169cdc4?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "details": ["Crimson Felt Finish", "Hand-tooled band", "Pheasant quill", "Custom sweatband"]
+    },
+    {
+      "id": "renegade-04",
+      "name": "The Outlaw",
+      "price": 275,
+      "status": "SOLD OUT",
+      "edition": "1-of-1 Archived",
+      "description": "Weathered dark chocolate leather crown, hammered copper emblem, raw turkey feather wrap.",
+      "image_url": "https://images.unsplash.com/photo-1691162629885-efe88e64899c?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "details": ["Full Grain Leather Crown", "Hammered Copper Emblem", "Archived Collector Piece"]
+    },
+    {
+      "id": "renegade-05",
+      "name": "The Wanderer",
+      "price": 295,
+      "status": "Available",
+      "edition": "1-of-1 Original",
+      "description": "Pecos sand distressed wool felt, turquoise bead inlay, braided leather cord and hawk feather crest.",
+      "image_url": "https://images.unsplash.com/photo-1691162701750-d80241f22e74?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "details": ["Sand Wool Felt", "Turquoise bead accent", "Braided cord", "Silk inner lining"]
+    },
+    {
+      "id": "renegade-06",
+      "name": "The Shaman",
+      "price": 325,
+      "status": "Available",
+      "edition": "1-of-1 Masterpiece",
+      "description": "Heavy distressed sage-tinted felt, carved buffalo bone skull charm, layered raven feathers, wire-wrapped crown.",
+      "image_url": "https://images.unsplash.com/photo-1562725380-116d4e06aea9?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "details": ["Sage Heavy Felt", "Buffalo bone skull", "Wire-wrapped crown", "Masterpiece stamp"]
+    }
+  ],
+  "gallery_images": [
+    {
+      "title": "The Ghost Rider Custom",
+      "category": "Stage Wear",
+      "image_url": "https://images.unsplash.com/photo-1763095548056-4009d387cb29?crop=entropy&cs=srgb&fm=jpg&q=85"
+    },
+    {
+      "title": "Copper Skull Cattleman",
+      "category": "Custom Build",
+      "image_url": "https://images.unsplash.com/photo-1562725380-5b3ddd7d2426?crop=entropy&cs=srgb&fm=jpg&q=85"
+    },
+    {
+      "title": "Artisan Leather Shaping",
+      "category": "Workshop",
+      "image_url": "https://images.unsplash.com/photo-1580339475954-314480c9b343?crop=entropy&cs=srgb&fm=jpg&q=85"
+    },
+    {
+      "title": "Wildland Distressed Brim",
+      "category": "Custom Build",
+      "image_url": "https://images.unsplash.com/photo-1785088560849-55fab169cdc4?crop=entropy&cs=srgb&fm=jpg&q=85"
+    }
+  ],
+  "key_components": [
+    "HeaderNav: Glassmorphism bar with SVG skull/feather logo mark, page navigation links, claim counter, and cart modal button",
+    "HeroSection: Kinetic text reveal, 3D mouse parallax hat tilt visual, audio toggle mood effect (optional gentle ambient camp crackle/wind), dual CTA",
+    "ShopSection: Filterable catalog with direct Stripe 'Claim this hat' modal, instant order state, and detail overlay",
+    "CustomHatBuilder: Interactive form with visual options for shape, brim, distressinglevel, feather type, skull coin accents, and custom sizing",
+    "GalleryMasonry: Filterable lightbox view of archived custom orders",
+    "OurStory: Rich text & archival photography scrollytelling section",
+    "FAQAccordion: Styled dark accordion using Radix UI/Shadcn with copper borders",
+    "ShippingReturnsPage: Outlaw guarantee, sizing guide, and care instructions",
+    "AdminPasscodeModal: Secret passcode access for viewing customer requests & shop orders"
+  ],
+  "testing_guidelines": {
+    "required_data_testids": [
+      "nav-logo",
+      "nav-shop-link",
+      "nav-custom-link",
+      "nav-gallery-link",
+      "nav-story-link",
+      "nav-contact-link",
+      "nav-faq-link",
+      "hero-title",
+      "hero-shop-cta",
+      "hero-custom-cta",
+      "product-card-renegade-01",
+      "product-claim-button-renegade-01",
+      "product-card-renegade-04-sold",
+      "custom-hat-form",
+      "custom-hat-submit-button",
+      "gallery-item-0",
+      "contact-form-submit-button",
+      "admin-passcode-input",
+      "admin-login-button"
+    ]
+  },
+  "instructions_to_main_agent": "Ensure all files use React .js format. Implement Lenis smooth scroll, framer-motion scroll reveals, dark theme aesthetic, and ensure every element includes data-testid attributes. Connect Stripe claim checkout flow mock with payment success/cancel redirection handling."
+}
