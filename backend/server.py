@@ -55,6 +55,12 @@ class Product(BaseDocument):
     currency: str = "CAD"
     tagline: str = ""
     subtitle: str = ""
+    story: str = ""
+    size: str = ""
+    material: str = ""
+    colour: str = ""
+    hatband: str = ""
+    handmade: str = "Handmade in Powell River, BC"
     description: str
     details: List[str] = []
     images: List[str] = []

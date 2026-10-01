@@ -35,6 +35,7 @@ export const NAV = [
   { to: "/story", label: "About", id: "story" },
   { to: "/gallery", label: "Gallery", id: "gallery" },
   { to: "/contact", label: "Contact", id: "contact" },
+  { to: "/faq", label: "FAQ", id: "faq" },
 ];
 
 export const FOOTER_LINKS = [

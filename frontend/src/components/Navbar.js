@@ -110,7 +110,7 @@ export const Navbar = () => {
         {mobile && (
           <motion.nav initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} className="overflow-hidden border-t border-[#C87D53]/20 xl:hidden" data-testid="nav-mobile-menu">
             <div className="flex flex-col px-5 pb-6 pt-2">
-              {[...NAV, { to: "/faq", label: "FAQ", id: "faq" }].map((n) => (
+              {NAV.map((n) => (
                 <NavLink key={n.to} to={n.to} end={n.end} data-testid={`mobile-nav-${n.id}-link`} className={({ isActive }) => `block border-b border-[#C87D53]/15 py-4 font-rye text-2xl uppercase ${isActive ? "text-[#D9935F]" : "text-[#EFE3CC]"}`}>
                   {n.label}
                 </NavLink>

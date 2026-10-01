@@ -17,7 +17,7 @@ export const SectionTitle = ({ children, testId }) => (
   </div>
 );
 
-const FeaturedCard = ({ p, i }) => (
+export const FeaturedCard = ({ p, i }) => (
   <motion.div
     initial={{ opacity: 0, y: 24 }}
     whileInView={{ opacity: 1, y: 0 }}
