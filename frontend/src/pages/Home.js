@@ -1,142 +1,128 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { toast } from "sonner";
 import { Hero } from "../components/Hero";
-import { Marquee } from "../components/Marquee";
-import { ProductCard } from "../components/ProductCard";
-import { Reveal, Eyebrow } from "../components/Motion";
+import { FavButton } from "../components/FavButton";
 import { useProducts } from "../hooks/useProducts";
-import { IMAGES, CUSTOM_STEPS } from "../data/content";
+import { IMAGES } from "../data/content";
+import { api, formatCAD } from "../lib/api";
 
-const Featured = () => {
+export const SectionTitle = ({ children, testId }) => (
+  <div className="flex items-center justify-center gap-4 sm:gap-6" data-testid={testId}>
+    <span className="h-px w-8 bg-[#C87D53]/70 sm:w-24" />
+    <h2 className="font-caslon whitespace-nowrap text-lg font-bold uppercase tracking-[0.25em] text-[#EFE3CC] sm:text-2xl sm:tracking-[0.4em]">{children}</h2>
+    <span className="h-px w-8 bg-[#C87D53]/70 sm:w-24" />
+  </div>
+);
+
+const FeaturedCard = ({ p, i }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 24 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, amount: 0.1 }}
+    transition={{ duration: 0.8, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
+    className="min-w-0"
+  >
+    <Link to={`/shop/${p.slug}`} className="copper-frame group relative block bg-[#0A0806] transition-[border-color] duration-300 hover:border-[#C87D53]" data-testid={`featured-card-${p.slug}`}>
+      <div className="relative aspect-[3/2.1] overflow-hidden">
+        <img src={p.images?.[0]} alt={p.name} loading="lazy" className={`h-full w-full object-cover transition-transform duration-[1.2s] group-hover:scale-[1.07] ${p.sold ? "grayscale-[60%]" : ""}`} />
+        <FavButton slug={p.slug} className="absolute right-1 top-1" />
+        {p.sold && <span className="font-rye absolute bottom-2 left-2 border border-[#b23a2a] bg-[#0D0B08]/80 px-2 py-0.5 text-xs text-[#e0573f]">SOLD OUT</span>}
+      </div>
+      <div className="px-2 py-3 text-center">
+        <p className="font-caslon text-[13px] font-bold uppercase tracking-[0.14em] text-[#EFE3CC] sm:text-sm">{p.name}</p>
+        <p className="font-caslon mt-1 text-[13px] font-bold tracking-[0.1em] text-[#EFE3CC]/90 sm:text-sm" data-testid={`featured-price-${p.slug}`}>{formatCAD(p.price)}</p>
+      </div>
+    </Link>
+  </motion.div>
+);
+
+const FeaturedHats = () => {
   const { products } = useProducts();
   return (
-    <section className="mx-auto max-w-[1440px] px-5 py-24 sm:px-8 sm:py-32 lg:px-12" data-testid="featured-collection">
-      <div className="mb-14 flex flex-col justify-between gap-6 md:flex-row md:items-end">
-        <Reveal>
-          <Eyebrow className="mb-4">The Featured Collection</Eyebrow>
-          <h2 className="font-cinzel text-4xl font-black uppercase leading-none tracking-tight sm:text-5xl lg:text-6xl">Six Hats.<br />Six Originals.</h2>
-        </Reveal>
-        <Reveal delay={0.15}>
-          <Link to="/shop" className="group inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.25em] text-[#C87D53]" data-testid="featured-view-all">
-            View all hats <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-          </Link>
-        </Reveal>
-      </div>
-      <div className="grid gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
-        {products.map((p, i) => (
-          <ProductCard key={p.slug} p={p} index={i} showDescription={false} />
-        ))}
-      </div>
-    </section>
-  );
-};
-
-const NoTwo = () => (
-  <section className="leather-bg relative overflow-hidden py-24 sm:py-32" data-testid="no-two-section">
-    <div className="mx-auto grid max-w-[1440px] items-center gap-14 px-5 sm:px-8 lg:grid-cols-12 lg:px-12">
-      <Reveal className="lg:col-span-6">
-        <div className="notch spotlight aspect-[4/3] overflow-hidden">
-          <img src={IMAGES.burn} alt="Burning the brim of a hat by hand" className="h-full w-full object-cover" />
-        </div>
-      </Reveal>
-      <div className="lg:col-span-6 lg:pl-8">
-        <Reveal>
-          <Eyebrow className="mb-6">The Renegade Way</Eyebrow>
-          <h2 className="font-rye text-5xl leading-[1] text-[#F2EADB] sm:text-6xl lg:text-7xl" data-testid="no-two-title">No Two Are<br /><span className="text-[#C87D53]">The Same.</span></h2>
-        </Reveal>
-        <Reveal delay={0.15}>
-          <p className="mt-8 max-w-lg text-lg leading-relaxed text-[#F2EADB]/85">
-            Every Renegade Hat is individually transformed by hand. Distressed, decorated and finished with its own character. There are no factory duplicates here.
-          </p>
-          <div className="copper-rule my-10 max-w-md" />
-          <div className="grid max-w-md grid-cols-3 gap-6">
-            {[["100%", "Handmade"], ["1/1", "Every hat"], ["0", "Duplicates"]].map(([n, l]) => (
-              <div key={l}>
-                <p className="font-cinzel text-3xl font-black text-[#C87D53]">{n}</p>
-                <p className="mt-1 text-xs uppercase tracking-[0.2em] text-[#A3978C]">{l}</p>
-              </div>
-            ))}
-          </div>
-        </Reveal>
-      </div>
-    </div>
-  </section>
-);
-
-const CustomStrip = () => (
-  <section className="mx-auto max-w-[1440px] px-5 py-24 sm:px-8 sm:py-32 lg:px-12" data-testid="custom-section">
-    <div className="grid gap-14 lg:grid-cols-12">
-      <div className="lg:col-span-5">
-        <div className="lg:sticky lg:top-32">
-          <Reveal>
-            <Eyebrow className="mb-6">Custom Hats</Eyebrow>
-            <h2 className="font-cinzel text-4xl font-black uppercase leading-[0.95] tracking-tight sm:text-5xl lg:text-6xl">Your Vision.<br />Our Hands.</h2>
-            <p className="mt-6 max-w-md text-base leading-relaxed text-[#A3978C] md:text-lg">
-              Request a one-of-a-kind custom hat built around you — your colours, your symbols, your story.
-            </p>
-            <Link to="/custom" className="btn-primary mt-10" data-testid="home-custom-cta">Start Your Custom Hat <ArrowRight className="h-4 w-4" /></Link>
-          </Reveal>
-        </div>
-      </div>
-      <div className="lg:col-span-7">
-        {CUSTOM_STEPS.map((s, i) => (
-          <Reveal key={s.n} delay={i * 0.05}>
-            <div className="group flex gap-6 border-t border-[#C87D53]/20 py-8 transition-colors duration-500 hover:bg-[#16120E] sm:gap-10 sm:px-4">
-              <span className="font-mono-plex pt-2 text-sm text-[#C87D53]">{s.n}</span>
-              <div>
-                <h3 className="font-cinzel text-2xl font-bold uppercase transition-colors duration-300 group-hover:text-[#C87D53] sm:text-3xl">{s.title}</h3>
-                <p className="mt-2 text-[#A3978C]">{s.text}</p>
-              </div>
-            </div>
-          </Reveal>
-        ))}
-      </div>
-    </div>
-  </section>
-);
-
-const GalleryBento = () => {
-  const tiles = [
-    { src: IMAGES.musician, cls: "col-span-2 row-span-2 lg:col-span-2 lg:row-span-2" },
-    { src: IMAGES.detail, cls: "col-span-1 row-span-1" },
-    { src: IMAGES.coast, cls: "col-span-1 row-span-2" },
-    { src: IMAGES.jolly, cls: "col-span-1 row-span-1" },
-  ];
-  return (
-    <section className="mx-auto max-w-[1440px] px-5 pb-24 sm:px-8 sm:pb-32 lg:px-12" data-testid="gallery-teaser">
-      <Reveal className="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
-        <div>
-          <Eyebrow className="mb-4">From the Gallery</Eyebrow>
-          <h2 className="font-cinzel text-4xl font-black uppercase leading-none sm:text-5xl">Worn by the Untamed</h2>
-        </div>
-        <Link to="/gallery" className="btn-ghost" data-testid="home-gallery-cta">Enter the Gallery</Link>
-      </Reveal>
-      <Reveal>
-        <div className="grid auto-rows-[160px] grid-cols-2 gap-3 sm:auto-rows-[220px] lg:grid-cols-4 lg:auto-rows-[260px]">
-          {tiles.map((t, i) => (
-            <Link to="/gallery" key={i} className={`group relative overflow-hidden bg-[#16120E] ${t.cls}`} data-testid={`home-bento-${i}`}>
-              <img src={t.src} alt="Renegade hat" loading="lazy" className="h-full w-full object-cover transition-transform duration-[1.4s] group-hover:scale-105" />
-              <div className="absolute inset-0 bg-[#0D0B08]/20 transition-colors duration-500 group-hover:bg-transparent" />
-            </Link>
+    <section className="tex-leather torn-edge px-4 pb-10 pt-10 sm:px-8 lg:px-12" data-testid="featured-collection">
+      <div className="relative mx-auto max-w-[1440px]">
+        <SectionTitle testId="featured-title">Featured Hats</SectionTitle>
+        <Link to="/shop" className="group mt-3 flex items-center justify-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#EFE3CC] underline decoration-[#C87D53]/60 underline-offset-4 hover:text-[#D9935F] lg:absolute lg:right-0 lg:top-2 lg:mt-0" data-testid="featured-view-all">
+          View All Hats <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+        </Link>
+        <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:mt-7 lg:grid-cols-6 lg:gap-4" data-testid="featured-grid">
+          {products.map((p, i) => (
+            <FeaturedCard key={p.slug} p={p} i={i} />
           ))}
         </div>
-      </Reveal>
+      </div>
     </section>
   );
 };
 
-const StoryTeaser = () => (
-  <section className="relative overflow-hidden border-t border-[#C87D53]/15" data-testid="story-teaser">
-    <img src={IMAGES.workshop} alt="" className="absolute inset-0 h-full w-full object-cover opacity-30" />
-    <div className="absolute inset-0 bg-gradient-to-r from-[#0D0B08] via-[#0D0B08]/85 to-[#0D0B08]/40" />
-    <div className="relative mx-auto max-w-[1440px] px-5 py-28 sm:px-8 sm:py-40 lg:px-12">
-      <Reveal className="max-w-2xl">
-        <Eyebrow className="mb-6">Our Story</Eyebrow>
-        <p className="font-cinzel text-3xl font-semibold leading-snug sm:text-4xl lg:text-5xl">
-          Made by hand on the edge of the Pacific, in Powell River, B.C. — for rebels, musicians and free spirits.
-        </p>
-        <Link to="/story" className="btn-ghost mt-10" data-testid="home-story-cta">Read the Story</Link>
-      </Reveal>
+const Panel = ({ img, imgPos = "center", align = "right", children, testId, i }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 24 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, amount: 0.1 }}
+    transition={{ duration: 0.9, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+    className="copper-frame group relative min-h-[210px] overflow-hidden"
+    data-testid={testId}
+  >
+    <img src={img} alt="" className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.6s] group-hover:scale-105" style={{ objectPosition: imgPos }} />
+    <div className={`absolute inset-0 ${align === "right" ? "bg-gradient-to-r from-[#0D0B08]/30 via-[#0D0B08]/60 to-[#0D0B08]/90" : "bg-gradient-to-r from-[#0D0B08]/90 via-[#0D0B08]/65 to-[#0D0B08]/10"}`} />
+    <div className={`relative flex h-full flex-col justify-center p-6 sm:p-7 ${align === "right" ? "items-start sm:ml-[42%]" : "items-start"}`}>{children}</div>
+  </motion.div>
+);
+
+const PanelTitle = ({ children }) => <h3 className="font-rye text-[1.75rem] uppercase leading-none tracking-[0.06em] text-[#EFE3CC] sm:text-3xl">{children}</h3>;
+const PanelText = ({ children }) => <p className="mt-3 text-xs font-medium uppercase leading-relaxed tracking-[0.18em] text-[#E2D4BD]">{children}</p>;
+
+const Newsletter = () => {
+  const [email, setEmail] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [joined, setJoined] = useState(false);
+  const submit = async (e) => {
+    e.preventDefault();
+    setBusy(true);
+    try {
+      await api.post("/newsletter", { email });
+      setJoined(true);
+      setEmail("");
+      toast.success("You're on the list.");
+    } catch {
+      toast.error("Please enter a valid email address.");
+    } finally {
+      setBusy(false);
+    }
+  };
+  if (joined) return <p className="font-script mt-5 text-2xl text-[#D9935F]" data-testid="newsletter-success">Welcome to the outfit.</p>;
+  return (
+    <form onSubmit={submit} className="mt-5 flex w-full max-w-[400px]" data-testid="newsletter-form">
+      <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Your email address" className="min-h-[48px] w-full min-w-0 border border-[#C87D53]/50 bg-[#0D0B08]/85 px-4 text-sm text-[#EFE3CC] outline-none placeholder:text-[#A3978C] focus:border-[#C87D53]" data-testid="newsletter-email-input" />
+      <button disabled={busy} className="btn-primary shrink-0 px-5 shadow-none" data-testid="newsletter-join-button">
+        Join <ArrowRight className="h-4 w-4" />
+      </button>
+    </form>
+  );
+};
+
+const Promos = () => (
+  <section className="tex-wood px-4 py-8 sm:px-8 lg:px-12" data-testid="promo-panels">
+    <div className="mx-auto grid max-w-[1440px] gap-4 lg:grid-cols-[1.12fr_1fr_1.12fr]">
+      <Panel i={0} img={IMAGES.panelCustom} imgPos="left center" testId="promo-custom">
+        <PanelTitle>Custom Hats</PanelTitle>
+        <PanelText>Let’s create something<br />that’s uniquely yours.</PanelText>
+        <Link to="/custom" className="btn-primary mt-5 px-5 text-sm" data-testid="promo-custom-cta">Request a Custom Hat <ArrowRight className="h-4 w-4" /></Link>
+      </Panel>
+      <Panel i={1} img={IMAGES.panelStory} imgPos="center" testId="promo-story">
+        <PanelTitle>The Story</PanelTitle>
+        <PanelText>Handcrafted hats.<br />Real stories.</PanelText>
+        <Link to="/story" className="btn-primary mt-5 px-5 text-sm" data-testid="promo-story-cta">Our Story <ArrowRight className="h-4 w-4" /></Link>
+      </Panel>
+      <Panel i={2} img={IMAGES.panelTouch} imgPos="right center" align="left" testId="promo-newsletter">
+        <PanelTitle>Keep in Touch</PanelTitle>
+        <PanelText>Be the first to see new hats,<br />custom pieces and upcoming events.</PanelText>
+        <Newsletter />
+      </Panel>
     </div>
   </section>
 );
@@ -145,12 +131,8 @@ export default function Home() {
   return (
     <div data-testid="home-page">
       <Hero />
-      <Marquee />
-      <Featured />
-      <NoTwo />
-      <CustomStrip />
-      <GalleryBento />
-      <StoryTeaser />
+      <FeaturedHats />
+      <Promos />
     </div>
   );
 }

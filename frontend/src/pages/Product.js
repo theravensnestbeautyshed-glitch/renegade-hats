@@ -25,18 +25,18 @@ export default function Product() {
 
   if (error)
     return (
-      <div className="mx-auto max-w-[1440px] px-5 pb-32 pt-44 sm:px-8 lg:px-12" data-testid="product-not-found">
+      <div className="mx-auto max-w-[1440px] px-5 pb-32 pt-20 sm:px-8 lg:px-12" data-testid="product-not-found">
         <h1 className="font-cinzel text-4xl font-black uppercase">This hat rode off.</h1>
         <Link to="/shop" className="btn-ghost mt-8">Back to Shop</Link>
       </div>
     );
-  if (!p) return <div className="min-h-screen pt-44 text-center text-[#A3978C]" data-testid="product-loading">Loading…</div>;
+  if (!p) return <div className="min-h-screen pt-20 text-center text-[#A3978C]" data-testid="product-loading">Loading…</div>;
 
   const images = Array.isArray(p.images) ? p.images : [];
   const inCart = has(p.slug);
 
   return (
-    <div className="mx-auto max-w-[1440px] px-5 pb-28 pt-28 sm:px-8 sm:pt-32 lg:px-12" data-testid="product-page">
+    <div className="mx-auto max-w-[1440px] px-5 pb-28 pt-10 sm:px-8 sm:pt-12 lg:px-12" data-testid="product-page">
       <Link to="/shop" className="mb-8 inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[#A3978C] hover:text-[#C87D53]" data-testid="product-back-link">
         <ArrowLeft className="h-4 w-4" /> All Hats
       </Link>

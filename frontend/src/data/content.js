@@ -1,6 +1,18 @@
 import { IMG } from "../lib/api";
 
 export const IMAGES = {
+  heroHat: "/img/hero-hat.jpg",
+  heroHatFull: IMG + "9b4445339774a4461392164e177dd0003cb29138866e59b2d745390a20c5c8a4.jpeg",
+  heroHatWide: IMG + "3b341fe002aea5ff4abf2a86980be2793ca3f11cabcfff3cb2ffe3b6c3d4d833.jpeg",
+  panelCustom: IMG + "992e0de01c48dd2fee70764df86dd492aea1b2cfb091036b3537f3b33e9cd6bc.jpeg",
+  panelStory: IMG + "52ed9c1014397fbc06cd2c8b794998b3efbac815feeff1bce1cc7562c32b8637.jpeg",
+  panelTouch: IMG + "ef45626b833067a84a920929f2b4c443a0d61471a540d75a4cfd0fd2c450faf3.jpeg",
+  rRenegade: IMG + "98281262151d3dac1c523701913dec58d65defd851b78f65733e8c3a6a56c870.jpeg",
+  rRed: IMG + "640b0339edab737223e39a580cb47295b248f2c231078a10af5fc13110b1956e.jpeg",
+  rShaman: IMG + "fcc5c108b1182483df79b2041058e8a5dbe621ca59fc54f1cfe0f66beb26a372.jpeg",
+  rOutlaw: IMG + "15cd4f16ad9491247e1a1d2c795b59f0bd303563c0ff9c48f4d2529e5605cbd0.jpeg",
+  rWanderer: IMG + "88afc1f505607c1f57cd987dcdbb245bef5cd095afc61f16877dca9e212a754f.jpeg",
+  rMidnight: IMG + "d45bc7c69c4aae1d53f66275f1e7698f43bf60110316aef3256d4afc58014723.jpeg",
   hero: IMG + "eff3b1dd14fd906ade93d98b29b5c14396b0e150628fa8b29a8f28a99263a321.jpeg",
   workshop: IMG + "e95956ae6a17eb48e773bb108fb0230235917a7fdaf48a47bddf6a55aff96070.jpeg",
   burn: IMG + "3a23bee259d0b6d83c01b44c362a1b97c6f71220a96cb67c798425ee6f72c377.jpeg",
@@ -18,15 +30,33 @@ export const IMAGES = {
 };
 
 export const NAV = [
+  { to: "/", label: "Home", id: "home", end: true },
   { to: "/shop", label: "Shop", id: "shop" },
   { to: "/custom", label: "Custom Hats", id: "custom" },
+  { to: "/story", label: "About", id: "story" },
   { to: "/gallery", label: "Gallery", id: "gallery" },
-  { to: "/story", label: "Our Story", id: "story" },
-  { to: "/faq", label: "FAQ", id: "faq" },
+  { to: "/contact", label: "Contact", id: "contact" },
+];
+
+export const FOOTER_LINKS = [
+  { to: "/faq", label: "FAQs", id: "faq" },
+  { to: "/shipping", label: "Shipping", id: "shipping" },
+  { to: "/shipping#returns", label: "Returns", id: "returns" },
+  { to: "/privacy", label: "Privacy", id: "privacy" },
   { to: "/contact", label: "Contact", id: "contact" },
 ];
 
 export const GALLERY = [
+  { src: IMAGES.heroHatWide, title: "Barn Light", tag: "Collection" },
+  { src: IMAGES.rShaman, title: "The Shaman", tag: "Collection" },
+  { src: IMAGES.rRed, title: "Renegade Red", tag: "Collection" },
+  { src: IMAGES.panelCustom, title: "Concho Detail", tag: "Details" },
+  { src: IMAGES.rMidnight, title: "Midnight Renegade", tag: "Collection" },
+  { src: IMAGES.panelStory, title: "Shaping by Hand", tag: "Workshop" },
+  { src: IMAGES.rOutlaw, title: "The Outlaw", tag: "Collection" },
+  { src: IMAGES.panelTouch, title: "Prairie Dusk", tag: "Worn" },
+  { src: IMAGES.rWanderer, title: "The Wanderer", tag: "Collection" },
+  { src: IMAGES.rRenegade, title: "The Renegade", tag: "Collection" },
   { src: IMAGES.renegade, title: "The Renegade", tag: "Collection", tall: true },
   { src: IMAGES.wall, title: "The Rack", tag: "Workshop" },
   { src: IMAGES.musician, title: "Stage Ready", tag: "Worn", tall: true },
@@ -66,4 +96,6 @@ export const SOCIALS = [
   { label: "Instagram", href: "https://instagram.com", id: "instagram" },
   { label: "Facebook", href: "https://facebook.com", id: "facebook" },
   { label: "TikTok", href: "https://tiktok.com", id: "tiktok" },
+  { label: "YouTube", href: "https://youtube.com", id: "youtube" },
+  { label: "Pinterest", href: "https://pinterest.com", id: "pinterest" },
 ];

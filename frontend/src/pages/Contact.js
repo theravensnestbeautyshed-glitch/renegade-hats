@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { toast } from "sonner";
-import { MapPin, Instagram, Facebook, Music2 } from "lucide-react";
+import { MapPin } from "lucide-react";
 import { PageHeader } from "../components/PageHeader";
 import { Reveal, Eyebrow } from "../components/Motion";
 import { api } from "../lib/api";
 import { SOCIALS } from "../data/content";
-
-const ICONS = { instagram: Instagram, facebook: Facebook, tiktok: Music2 };
+import { SOCIAL_ICONS as ICONS } from "../components/Footer";
 const initial = { name: "", email: "", phone: "", message: "" };
 
 export default function Contact() {

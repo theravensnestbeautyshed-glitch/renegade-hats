@@ -107,6 +107,10 @@ class CheckoutIn(BaseModel):
     origin_url: str
 
 
+class NewsletterIn(BaseModel):
+    email: EmailStr
+
+
 class SoldIn(BaseModel):
     sold: bool
 
@@ -152,6 +156,13 @@ async def create_custom(req: CustomRequestIn):
 async def create_contact(req: ContactIn):
     item = ContactMessage(**req.model_dump())
     await db.contact_messages.insert_one(item.to_mongo())
+    return {"ok": True}
+
+
+@api.post("/newsletter")
+async def join_newsletter(req: NewsletterIn):
+    await db.newsletter.update_one({"email": req.email.lower()},
+                                   {"$setOnInsert": {"email": req.email.lower(), "created_at": now()}}, upsert=True)
     return {"ok": True}
 
 
@@ -245,7 +256,9 @@ async def admin_data(x_admin_passcode: Optional[str] = Header(None)):
     customs = await db.custom_requests.find().sort("created_at", -1).to_list(500)
     contacts = await db.contact_messages.find().sort("created_at", -1).to_list(500)
     orders = await db.payment_transactions.find({"payment_status": "paid"}).sort("created_at", -1).to_list(500)
+    subs = await db.newsletter.find({}, {"_id": 0}).sort("created_at", -1).to_list(2000)
     return {
+        "subscribers": subs,
         "custom_requests": [CustomRequest.from_mongo(d).model_dump() for d in customs],
         "contacts": [ContactMessage.from_mongo(d).model_dump() for d in contacts],
         "orders": [Transaction.from_mongo(d).model_dump() for d in orders],

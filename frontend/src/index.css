@@ -26,9 +26,36 @@ body {
 
 ::selection { background: var(--copper); color: var(--ink); }
 
-.font-rye { font-family: "Rye", serif; }
-.font-cinzel { font-family: "Cinzel", serif; }
-.font-mono-plex { font-family: "IBM Plex Mono", monospace; }
+.font-rye { font-family: "Smokum", serif; font-weight: 400; letter-spacing: 0.03em; }
+.font-cinzel { font-family: "Smokum", serif; font-weight: 400 !important; letter-spacing: 0.04em; font-synthesis: none; }
+.font-mono-plex { font-family: "Figtree", sans-serif; font-weight: 600; }
+.font-script { font-family: "Kaushan Script", cursive; }
+.font-caslon { font-family: "Libre Caslon Text", serif; }
+
+.tex-wood {
+    background-color: #0f0b08;
+    background-image: linear-gradient(rgba(10, 8, 6, 0.78), rgba(10, 8, 6, 0.85)), url("https://static.prod-images.emergentagent.com/jobs/ef4dfbc2-be2e-46cd-afc0-0ca495bb7551/images/74b369d3707d2f4a30d01a0acaa774ee80fcb45212f963be2a2dd5231cc8972d.jpeg");
+    background-size: cover;
+    background-position: center;
+}
+.tex-leather {
+    background-color: #0d0b08;
+    background-image: linear-gradient(rgba(10, 8, 6, 0.55), rgba(10, 8, 6, 0.7)), url("https://static.prod-images.emergentagent.com/jobs/ef4dfbc2-be2e-46cd-afc0-0ca495bb7551/images/4a7c5bec4b289fdf207505c0e10abccd298d72f3206118c5738d1140b385e9ce.jpeg");
+    background-size: 600px;
+}
+.torn-edge { position: relative; }
+.torn-edge::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: -3px;
+    height: 6px;
+    background: linear-gradient(90deg, transparent, rgba(200, 125, 83, 0.55) 15%, rgba(140, 80, 45, 0.7) 50%, rgba(200, 125, 83, 0.55) 85%, transparent);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='6'%3E%3Cpath d='M0 3 L8 2 L15 4 L24 2 L33 3.5 L40 1.5 L52 4 L60 2.5 L71 3.8 L80 1.8 L92 3.6 L101 2 L110 4 L120 2.6 L120 6 L0 6Z' fill='black'/%3E%3C/svg%3E") repeat-x;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='6'%3E%3Cpath d='M0 3 L8 2 L15 4 L24 2 L33 3.5 L40 1.5 L52 4 L60 2.5 L71 3.8 L80 1.8 L92 3.6 L101 2 L110 4 L120 2.6 L120 6 L0 6Z' fill='black'/%3E%3C/svg%3E") repeat-x;
+    pointer-events: none;
+    z-index: 2;
+}
+.copper-frame { border: 1px solid rgba(200, 125, 83, 0.38); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.6); }
 
 .grain::after {
     content: "";
@@ -49,13 +76,12 @@ body {
 
 .leather-bg {
     background-color: var(--leather);
-    background-image:
-        radial-gradient(ellipse at 20% 0%, rgba(200, 125, 83, 0.10), transparent 55%),
-        radial-gradient(ellipse at 100% 100%, rgba(184, 115, 51, 0.08), transparent 50%);
+    background-image: linear-gradient(rgba(14, 11, 8, 0.6), rgba(14, 11, 8, 0.72)), url("https://static.prod-images.emergentagent.com/jobs/ef4dfbc2-be2e-46cd-afc0-0ca495bb7551/images/4a7c5bec4b289fdf207505c0e10abccd298d72f3206118c5738d1140b385e9ce.jpeg");
+    background-size: 600px;
 }
 
 .notch {
-    clip-path: polygon(14px 0, calc(100% - 14px) 0, 100% 14px, 100% calc(100% - 14px), calc(100% - 14px) 100%, 14px 100%, 0 calc(100% - 14px), 0 14px);
+    border: 1px solid rgba(200, 125, 83, 0.35);
 }
 
 .spotlight { position: relative; }
@@ -79,21 +105,26 @@ body {
 .marquee-track { animation: marquee 60s linear infinite; }
 
 .btn-primary {
-    @apply inline-flex items-center justify-center gap-3 px-7 py-4 text-xs font-semibold uppercase tracking-[0.25em];
-    background: var(--copper);
-    color: var(--ink);
-    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    @apply inline-flex min-h-[48px] items-center justify-center gap-3 px-8 py-3 text-base uppercase tracking-[0.18em];
+    font-family: "Smokum", serif;
+    color: #f6ead6;
+    background: linear-gradient(180deg, #9a5532 0%, #7a3f22 55%, #5e2f18 100%);
+    border: 1px solid #c87d53;
+    box-shadow: inset 0 1px 0 rgba(255, 210, 170, 0.25), inset 0 -2px 0 rgba(0, 0, 0, 0.35), 0 0 0 3px rgba(13, 11, 8, 0.9), 0 0 0 4px rgba(200, 125, 83, 0.35);
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.6);
+    transition: filter 0.3s ease, transform 0.3s ease;
 }
-.btn-primary:hover { background: var(--cream); transform: translateY(-2px); box-shadow: 0 10px 30px -10px rgba(200, 125, 83, 0.6); }
-.btn-primary:disabled { opacity: 0.45; cursor: not-allowed; transform: none; box-shadow: none; }
+.btn-primary:hover { filter: brightness(1.15); transform: translateY(-1px); }
+.btn-primary:disabled { opacity: 0.45; cursor: not-allowed; transform: none; filter: none; }
 
 .btn-ghost {
-    @apply inline-flex items-center justify-center gap-3 px-7 py-4 text-xs font-semibold uppercase tracking-[0.25em];
-    border: 1px solid rgba(242, 234, 219, 0.35);
+    @apply inline-flex min-h-[48px] items-center justify-center gap-3 px-7 py-3 text-xs font-semibold uppercase tracking-[0.22em];
+    border: 1px solid rgba(200, 125, 83, 0.5);
     color: var(--cream);
+    background: rgba(13, 11, 8, 0.4);
     transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
 }
-.btn-ghost:hover { border-color: var(--copper); background: rgba(200, 125, 83, 0.12); color: var(--cream); }
+.btn-ghost:hover { border-color: var(--copper); background: rgba(200, 125, 83, 0.14); color: var(--cream); }
 
 .field {
     @apply w-full bg-transparent px-4 py-3 text-base outline-none;

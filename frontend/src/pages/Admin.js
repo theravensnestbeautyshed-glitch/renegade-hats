@@ -61,6 +61,7 @@ export default function Admin() {
   const customs = data.custom_requests || [];
   const contacts = data.contacts || [];
   const orders = data.orders || [];
+  const subs = data.subscribers || [];
 
   return (
     <div className="mx-auto max-w-[1200px] px-5 pb-28 pt-32 sm:px-8" data-testid="admin-dashboard">
@@ -70,7 +71,7 @@ export default function Admin() {
       </div>
       <Tabs defaultValue="hats">
         <TabsList className="mb-6 flex h-auto flex-wrap justify-start gap-1 bg-transparent p-0">
-          {[["hats", `Hats (${products.length})`], ["custom", `Custom (${customs.length})`], ["messages", `Messages (${contacts.length})`], ["orders", `Orders (${orders.length})`]].map(([v, l]) => (
+          {[["hats", `Hats (${products.length})`], ["custom", `Custom (${customs.length})`], ["messages", `Messages (${contacts.length})`], ["orders", `Orders (${orders.length})`], ["subs", `Subscribers (${subs.length})`]].map(([v, l]) => (
             <TabsTrigger key={v} value={v} className="border border-[#C87D53]/25 px-4 py-2 text-xs uppercase tracking-[0.15em] data-[state=active]:bg-[#C87D53] data-[state=active]:text-[#0D0B08]" data-testid={`admin-tab-${v}`}>{l}</TabsTrigger>
           ))}
         </TabsList>
@@ -118,6 +119,13 @@ export default function Admin() {
               <p className="font-mono-plex text-sm text-[#A3978C]">{new Date(o.created_at).toLocaleString()}</p>
               <p className="mt-1 font-semibold">{(o.slugs || []).join(", ")}</p>
               <p className="font-mono-plex text-[#C87D53]">{formatCAD(o.amount)}</p>
+            </Card>
+          ))}
+        </TabsContent>
+        <TabsContent value="subs" className="space-y-2">
+          {subs.length === 0 ? <Empty /> : subs.map((s) => (
+            <Card key={s.email} testId={`admin-sub-${s.email}`}>
+              <p>{s.email}</p>
             </Card>
           ))}
         </TabsContent>

@@ -15,7 +15,7 @@ export default function Shipping() {
       <section className="mx-auto max-w-4xl space-y-14 px-5 pb-28 sm:px-8">
         {SECTIONS.map((s, i) => (
           <Reveal key={s.t}>
-            <div className="border-t border-[#C87D53]/20 pt-8" data-testid={`shipping-section-${i}`}>
+            <div id={s.t === "Returns" ? "returns" : undefined} className="scroll-mt-28 border-t border-[#C87D53]/20 pt-8" data-testid={`shipping-section-${i}`}>
               <h2 className="font-cinzel text-2xl font-black uppercase sm:text-3xl">{s.t}</h2>
               <ul className="mt-6 space-y-3">
                 {s.items.map((it) => (

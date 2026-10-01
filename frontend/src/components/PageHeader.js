@@ -1,7 +1,7 @@
 import { MaskLines, Eyebrow, Reveal } from "./Motion";
 
 export const PageHeader = ({ eyebrow, lines, intro, image, testId }) => (
-  <section className="relative overflow-hidden pb-16 pt-36 sm:pb-24 sm:pt-44" data-testid={testId}>
+  <section className="relative overflow-hidden pb-14 pt-16 sm:pb-20 sm:pt-24" data-testid={testId}>
     {image && (
       <div className="absolute inset-0">
         <img src={image} alt="" className="h-full w-full object-cover opacity-30" />

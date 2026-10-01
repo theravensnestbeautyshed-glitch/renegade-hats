@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { formatCAD } from "../lib/api";
 import { useCart } from "../context/CartContext";
+import { FavButton } from "./FavButton";
 
 export const ProductCard = ({ p, index = 0, showDescription = true }) => {
   const { add, has } = useCart();
@@ -15,7 +16,9 @@ export const ProductCard = ({ p, index = 0, showDescription = true }) => {
       className="group flex flex-col"
       data-testid={`product-card-${p.slug}`}
     >
-      <Link to={`/shop/${p.slug}`} className="notch spotlight relative block aspect-[4/5] overflow-hidden bg-[#16120E]" data-testid={`product-image-link-${p.slug}`}>
+      <div className="relative">
+      <FavButton slug={p.slug} className="absolute right-1 top-1" />
+      <Link to={`/shop/${p.slug}`} className="copper-frame relative block aspect-[4/5] overflow-hidden bg-[#0A0806]" data-testid={`product-image-link-${p.slug}`}>
         <img
           src={p.images?.[0]}
           alt={p.name}
@@ -26,15 +29,16 @@ export const ProductCard = ({ p, index = 0, showDescription = true }) => {
           No. {String(index + 1).padStart(2, "0")} / 1 of 1
         </span>
         {p.sold && (
-          <span className="font-rye absolute right-4 top-4 z-10 -rotate-6 border-2 border-[#b23a2a] px-3 py-1 text-sm text-[#e0573f]" data-testid={`product-sold-badge-${p.slug}`}>
+          <span className="font-rye absolute bottom-4 left-4 z-10 -rotate-3 border-2 border-[#b23a2a] bg-[#0D0B08]/80 px-3 py-1 text-sm text-[#e0573f]" data-testid={`product-sold-badge-${p.slug}`}>
             SOLD OUT
           </span>
         )}
       </Link>
+      </div>
       <div className="flex flex-1 flex-col pt-5">
         <div className="flex items-baseline justify-between gap-4">
-          <h3 className="font-cinzel text-xl font-bold uppercase tracking-wide text-[#F2EADB] sm:text-2xl">{p.name}</h3>
-          <span className="font-mono-plex shrink-0 text-sm text-[#C87D53]" data-testid={`product-price-${p.slug}`}>{formatCAD(p.price)}</span>
+          <h3 className="font-caslon text-base font-bold uppercase tracking-[0.12em] text-[#F2EADB] sm:text-lg">{p.name}</h3>
+          <span className="font-caslon shrink-0 text-sm font-bold text-[#D9935F]" data-testid={`product-price-${p.slug}`}>{formatCAD(p.price)}</span>
         </div>
         {showDescription && <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-[#A3978C]">{p.description}</p>}
         <div className="mt-5 grid grid-cols-2 gap-2">

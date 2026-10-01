@@ -2,10 +2,11 @@ import { createContext, useContext, useEffect, useState, useCallback } from "rea
 
 const CartContext = createContext(null);
 const KEY = "renegade_cart";
+const FAV_KEY = "renegade_favs";
 
-const load = () => {
+const load = (k = KEY) => {
   try {
-    const v = JSON.parse(localStorage.getItem(KEY) || "[]");
+    const v = JSON.parse(localStorage.getItem(k) || "[]");
     return Array.isArray(v) ? v : [];
   } catch {
     return [];
@@ -13,8 +14,16 @@ const load = () => {
 };
 
 export const CartProvider = ({ children }) => {
-  const [items, setItems] = useState(load);
+  const [items, setItems] = useState(() => load(KEY));
+  const [favs, setFavs] = useState(() => load(FAV_KEY));
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    localStorage.setItem(FAV_KEY, JSON.stringify(favs));
+  }, [favs]);
+
+  const toggleFav = useCallback((slug) => setFavs((f) => (f.includes(slug) ? f.filter((s) => s !== slug) : [...f, slug])), []);
+  const isFav = useCallback((slug) => favs.includes(slug), [favs]);
 
   useEffect(() => {
     localStorage.setItem(KEY, JSON.stringify(items));
@@ -30,7 +39,7 @@ export const CartProvider = ({ children }) => {
   const total = items.reduce((s, i) => s + (i.price || 0), 0);
 
   return (
-    <CartContext.Provider value={{ items, add, remove, clear, has, total, open, setOpen }}>
+    <CartContext.Provider value={{ items, add, remove, clear, has, total, open, setOpen, favs, toggleFav, isFav }}>
       {children}
     </CartContext.Provider>
   );
