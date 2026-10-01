@@ -87,6 +87,27 @@ def test_contact_invalid(s):
     assert r.status_code == 422
 
 
+# --- Newsletter ---
+def test_newsletter_valid(s):
+    r = s.post(f"{API}/newsletter", json={"email": "test_newsletter@example.com"}, timeout=30)
+    assert r.status_code == 200
+    assert r.json()["ok"] is True
+
+
+def test_newsletter_invalid_email(s):
+    r = s.post(f"{API}/newsletter", json={"email": "not-an-email"}, timeout=30)
+    assert r.status_code == 422
+
+
+def test_newsletter_in_admin_data(s):
+    r = s.get(f"{API}/admin/data", headers={"X-Admin-Passcode": ADMIN_PASSCODE}, timeout=30)
+    assert r.status_code == 200
+    data = r.json()
+    assert "subscribers" in data
+    emails = [x.get("email") for x in data["subscribers"]]
+    assert "test_newsletter@example.com" in emails
+
+
 # --- Payments ---
 def test_checkout_creates_session(s):
     r = s.post(f"{API}/payments/checkout", json={

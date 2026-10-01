@@ -1,0 +1,28 @@
+{
+  "summary": "Iteration 2 testing of RENÉGADE HATS redesign (dark western header, cinematic hero, featured grid, promo panels, newsletter, footer, mobile layout) plus regressions. Backend: 18/18 pytest tests pass (products order+CAD prices, _id excluded, custom-requests, contact, newsletter valid+422+admin visibility, Stripe checkout session + 409 on sold, admin auth + toggle sold). Frontend desktop 1536px: nav-story-link (ABOUT->/story), search dialog opens + result navigates to /shop/the-renegade, nav-account-button->/admin, cart drawer opens, 6 featured cards in correct order with correct slugs, favorite toggle persists after reload (localStorage), featured card click -> product page, promo-custom-cta->/custom, promo-story-cta->/story, newsletter success, all 5 footer socials + 5 footer page links present, returns link -> /shipping#returns, /privacy renders. Mobile 390x800: no horizontal overflow (scrollWidth=clientWidth=390), hero-image-mobile visible, hero-shop-cta + hero-custom-cta-mobile bottom at ~582px (fits above 800px fold), featured grid computed grid-template-columns = '173px 173px' (2 columns), hamburger menu opens + mobile-nav-shop-link navigates. Regression: shop product-add-button-the-renegade -> cart-drawer -> cart-checkout-button redirects to checkout.stripe.com/c/pay/cs_test_..., admin-login-button with passcode renegade2026 opens Back Room with admin-tab-subs tab showing newsletter subscribers.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/backend_test.py", "/app/test_reports/pytest/pytest_results.xml"],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Testid naming inconsistency between review request and implementation (not bugs): request references 'search-icon-button/account-icon-button/cart-icon-button' but code uses 'nav-search-button/nav-account-button/nav-cart-button'; request references 'nav-about-link' but ABOUT nav item has id='story' so actual testid is 'nav-story-link'; request references '*-renegade-state' but slugs are 'the-renegade/midnight-renegade/renegade-red/the-outlaw/the-wanderer/the-shaman'. Consider aligning docs OR adding aliased testids.",
+    "FavButton has no aria-pressed attribute; favorite state is only communicated visually via SVG 'fill-[#C87D53]' class. Add aria-pressed={on} for accessibility and more deterministic tests.",
+    "Hero on mobile 390x800: shop CTA bottom at ~582px — meets 'CTAs visible without scrolling' requirement, but is below the stated 650–750px minimum hero height in the request. If a 650–750px hero is required, the current hero is shorter than spec (could be intentional since 'without scrolling' is the explicit requirement).",
+    "Still relevant from iter 1: stripe.Price.list(lookup_keys=[...]) per slug on each checkout can hit rate limits for larger carts."
+  ],
+  "updated_files": ["/app/backend/tests/backend_test.py"],
+  "success_rate": {"backend": "100% (18/18)", "frontend": "100% of flows tested"},
+  "test_credentials": "Admin passcode: renegade2026 (confirmed working via admin-login-button + admin-passcode-input)",
+  "seed_data_creation": "Created TEST-prefixed newsletter subscribers (test_newsletter@example.com, test_front_newsletter@example.com), 1 TEST custom-request (TEST_Alice/test_alice@example.com), 1 TEST contact (TEST_Bob/test_bob@example.com), 1 pending Stripe transaction from frontend checkout redirect test. All admin sold toggles reset to false. Main agent may wipe db.newsletter / db.custom_requests / db.contact_messages / db.payment_transactions test rows if desired.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "backend_test.py has 18 tests at /app/backend/tests/backend_test.py (products, custom-requests, contact, newsletter + admin-data visibility, payments checkout + sold 409, admin auth + toggle). Frontend testids: nav-{home,shop,custom,story,gallery,contact,faq}-link (ABOUT routes to /story under id='story'), nav-{search,account,cart}-button, search-dialog/search-input/search-result-{slug}/search-empty, cart-drawer/cart-checkout-button, featured-card-{slug}/featured-price-{slug}/featured-grid/featured-view-all, fav-button-{slug}, hero-image/hero-image-mobile/hero-title/hero-shop-cta/hero-custom-cta/hero-custom-cta-mobile/hero-benefit-{i}, promo-custom-cta/promo-story-cta, newsletter-email-input/newsletter-join-button/newsletter-success, footer-social-{instagram,facebook,tiktok,youtube,pinterest}, footer-{faq,shipping,returns,privacy,contact}-link, product-add-button-{slug}/product-view-button-{slug}, admin-passcode-input/admin-login-button/admin-tab-subs. Product route is /shop/{slug}. Mobile nav uses mobile-nav-{id}-link.",
+  "rca of the issue": "No bugs found in iteration 2."
+}
