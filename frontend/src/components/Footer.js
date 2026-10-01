@@ -32,10 +32,10 @@ export const Footer = () => (
         <p className="mt-2 text-[11px] font-semibold uppercase tracking-[0.25em] text-[#C9B9A0]">One of a Kind. Handcrafted. No Rules.</p>
         <p className="mt-1 text-xs tracking-[0.08em] text-[#B9AC9C]" data-testid="footer-location">Handcrafted in Powell River, British Columbia, Canada 🇨🇦</p>
       </div>
-      <nav className="order-3 flex flex-wrap justify-center gap-x-1 gap-y-2 lg:justify-end">
+      <nav className="order-3 flex flex-wrap justify-center gap-x-5 gap-y-1 lg:justify-end lg:gap-x-1">
         {FOOTER_LINKS.map((l, i) => (
           <span key={l.id} className="flex items-center">
-            {i > 0 && <span className="px-2 text-[#C87D53]/60">|</span>}
+            {i > 0 && <span className="hidden px-2 text-[#C87D53]/60 lg:inline">|</span>}
             <Link to={l.to} className="py-2 text-xs font-medium uppercase tracking-[0.16em] text-[#EFE3CC] transition-colors hover:text-[#D9935F]" data-testid={`footer-${l.id}-link`}>
               {l.label}
             </Link>

@@ -1,25 +1,27 @@
 # Renégade Hats — PRD
 
 ## Original problem statement
-Premium e-commerce website for handmade hat brand RENÉGADE HATS — one-of-a-kind, handcrafted distressed western hats for rebels, rule breakers, musicians, free spirits. Tagline "More Than a Hat… It's a State of Mind." / "One of a Kind. Handcrafted. No Rules." Dark rugged premium western outlaw aesthetic (distressed leather, aged paper, worn metal, copper/bronze, cream type, subtle skull/Jolly Roger). Use the owner's real hat photos. Nav: Home, Shop, Custom Hats, Gallery, Our Story, FAQ, Contact (+ Shipping & Returns). Six hats in CAD: The Renegade $249, Midnight Renegade $249, Renegade Red $275, The Outlaw $275, The Wanderer $295, The Shaman $325. Shop cards (image, name, CAD price, description, VIEW HAT, ADD TO CART, SOLD OUT), product pages (gallery, details, availability, add to cart, custom inquiry), custom hat request, gallery, story (Powell River, BC), FAQ, contact form + socials, footer. Fully responsive, subtle animation, photography first.
+Premium e-commerce website for handmade hat brand RENÉGADE HATS — one-of-a-kind, handcrafted distressed western hats for rebels, rule breakers, musicians, free spirits. Tagline "More Than a Hat… It's a State of Mind." / "One of a Kind. Handcrafted. No Rules." Dark rugged premium western outlaw aesthetic. Use the owner's real hat photos. Six hats in CAD: The Renegade $249, Midnight Renegade $249, Renegade Red $275, The Outlaw $275, The Wanderer $295, The Shaman $325. Later: redesign to match owner's reference image; mobile hero refinements; mobile-first Shop page; remove everything to do with custom orders; only Facebook and Instagram socials.
 
 ## Architecture
-- FastAPI + MongoDB (products seeded from backend/catalog.py on startup; custom_requests, contact_messages, payment_transactions)
-- Stripe claimable sandbox (CA account), CAD prices via lookup keys `hat_<slug>` (setup_stripe.py), Stripe calculates tax at checkout, CA/US shipping address collection; hats auto-marked sold after paid
-- React + Tailwind + framer-motion + lenis; fonts Rye / Cinzel / Figtree / IBM Plex Mono; SVG hat+skull logo & favicon
-- Admin "Back Room" at /admin with passcode (env ADMIN_PASSCODE)
+- FastAPI + MongoDB (products seeded from backend/catalog.py on startup; contact_messages, newsletter, payment_transactions)
+- Stripe claimable sandbox (CA), CAD prices via lookup keys `hat_<slug>`; Stripe calculates tax; hats auto-marked sold after payment
+- React + Tailwind + framer-motion + lenis; fonts Smokum / Kaushan Script / Libre Caslon Text / Figtree
+- Admin "Back Room" /admin (passcode env ADMIN_PASSCODE): hats sold toggle, messages, orders, subscribers
 
-## Implemented (2026-10-01)
-- All pages: Home, Shop, Product, Custom, Gallery (lightbox + filters), Story, FAQ, Contact, Shipping & Returns, Payment success/cancel, Admin
-- Cart (localStorage) → Stripe checkout; sold-out handling; admin sold toggle and request/message/order views
-- Tested: backend 15/15 after _id fix, frontend flows 100%
+## Implemented
+- 2026-10-01: MVP (all pages, cart, Stripe checkout, admin)
+- 2026-10-01: Redesign to reference image (header, hero, featured hats, promo panels, footer, privacy page, search, favourites, newsletter)
+- 2026-10-01: Mobile hero refinements; new Shop page (One of a Kind badges, subtitles, "There's Only One" section)
+- 2026-10-01: Removed all custom-order content (page, routes, CTAs, FAQ items, admin tab, API); socials limited to Instagram + Facebook
+- Tests: iteration 3 — backend 16/16, frontend all flows pass
 
 ## Notes
-- Product/gallery images are AI-generated PLACEHOLDERS until the owner uploads real photos
-- Social links are placeholders (instagram.com / facebook.com / tiktok.com)
-- Shipping/returns policy text is placeholder wording to be confirmed by owner
+- Hat images are AI-generated PLACEHOLDERS based on reference image until owner uploads real photos
+- Social links point to instagram.com / facebook.com placeholders
+- Shipping/returns text is placeholder wording
 
 ## Backlog
-- P0: Swap in real hat photographs
-- P1: Email notifications for custom requests/orders; admin add/edit hats
-- P2: Size guide, Instagram feed
+- P0: Swap in real hat photographs; real Instagram/Facebook URLs
+- P1: Individual product page upgrade (story per hat, one-of-one number, CLAIM THIS RENEGADE); About and Contact page restyle to match
+- P2: Order notification emails, admin add/edit hats

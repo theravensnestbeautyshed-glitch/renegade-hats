@@ -84,7 +84,4 @@ export const FAQS = [
 export const SOCIALS = [
   { label: "Instagram", href: "https://instagram.com", id: "instagram" },
   { label: "Facebook", href: "https://facebook.com", id: "facebook" },
-  { label: "TikTok", href: "https://tiktok.com", id: "tiktok" },
-  { label: "YouTube", href: "https://youtube.com", id: "youtube" },
-  { label: "Pinterest", href: "https://pinterest.com", id: "pinterest" },
 ];

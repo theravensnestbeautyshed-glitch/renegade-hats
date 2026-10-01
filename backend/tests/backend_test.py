@@ -49,28 +49,12 @@ def test_get_product_404(s):
     assert r.status_code == 404
 
 
-# --- Custom requests ---
-def test_custom_request_valid(s):
+# --- Custom requests removed ---
+def test_custom_requests_endpoint_removed(s):
     r = s.post(f"{API}/custom-requests", json={
-        "name": "TEST_Alice", "email": "test_alice@example.com",
-        "vision": "A black feathered hat, pirate vibes", "base_hat": "the-renegade",
+        "name": "x", "email": "x@y.com", "vision": "x",
     }, timeout=30)
-    assert r.status_code == 200, r.text
-    assert r.json()["ok"] is True
-
-
-def test_custom_request_invalid_email(s):
-    r = s.post(f"{API}/custom-requests", json={
-        "name": "TEST", "email": "notanemail", "vision": "x",
-    }, timeout=30)
-    assert r.status_code == 422
-
-
-def test_custom_request_missing_vision(s):
-    r = s.post(f"{API}/custom-requests", json={
-        "name": "TEST", "email": "a@b.com", "vision": "",
-    }, timeout=30)
-    assert r.status_code == 422
+    assert r.status_code == 404
 
 
 # --- Contact ---
@@ -155,7 +139,8 @@ def test_admin_data_ok(s):
     r = s.get(f"{API}/admin/data", headers={"X-Admin-Passcode": ADMIN_PASSCODE}, timeout=30)
     assert r.status_code == 200
     data = r.json()
-    assert "custom_requests" in data and "contacts" in data and "orders" in data
+    assert "contacts" in data and "orders" in data and "subscribers" in data
+    assert "custom_requests" not in data
     for section in data.values():
         for item in section:
             assert "_id" not in item
