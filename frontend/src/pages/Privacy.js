@@ -2,8 +2,8 @@ import { PageHeader } from "../components/PageHeader";
 import { Reveal } from "../components/Motion";
 
 const SECTIONS = [
-  { t: "What We Collect", p: "When you place an order, request a custom hat, send a message or join our list, we collect the details you give us — such as your name, email, phone number, shipping address and the details of your request." },
-  { t: "How We Use It", p: "We use your information only to fulfil orders, build custom hats, reply to your messages and, if you opt in, send occasional news about new hats and events. We never sell your information." },
+  { t: "What We Collect", p: "When you place an order, send a message or join our list, we collect the details you give us — such as your name, email, phone number, shipping address and the details of your request." },
+  { t: "How We Use It", p: "We use your information only to fulfil orders, reply to your messages and, if you opt in, send occasional news about new hats and events. We never sell your information." },
   { t: "Payments", p: "Payments are processed securely by Stripe. Your card details go directly to Stripe and are never stored on our servers." },
   { t: "Your Choices", p: "You can unsubscribe from our emails at any time, or contact us to update or delete the information we hold about you." },
   { t: "Contact", p: "Questions about privacy? Reach us through the Contact page. Renégade Hats, Powell River, British Columbia, Canada." },

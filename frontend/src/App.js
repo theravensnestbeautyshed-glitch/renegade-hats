@@ -8,7 +8,6 @@ import { SmoothScroll } from "./components/SmoothScroll";
 import Home from "./pages/Home";
 import Shop from "./pages/Shop";
 import Product from "./pages/Product";
-import Custom from "./pages/Custom";
 import Gallery from "./pages/Gallery";
 import Story from "./pages/Story";
 import FAQ from "./pages/FAQ";
@@ -39,7 +38,6 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/shop" element={<Shop />} />
             <Route path="/shop/:slug" element={<Product />} />
-            <Route path="/custom" element={<Custom />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/story" element={<Story />} />
             <Route path="/faq" element={<FAQ />} />

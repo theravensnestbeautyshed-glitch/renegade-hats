@@ -107,20 +107,15 @@ const Newsletter = () => {
 
 const Promos = () => (
   <section className="tex-wood px-4 py-8 sm:px-8 lg:px-12" data-testid="promo-panels">
-    <div className="mx-auto grid max-w-[1440px] gap-4 lg:grid-cols-[1.12fr_1fr_1.12fr]">
-      <Panel i={0} img={IMAGES.panelCustom} imgPos="left center" testId="promo-custom">
-        <PanelTitle>Custom Hats</PanelTitle>
-        <PanelText>Let’s create something<br />that’s uniquely yours.</PanelText>
-        <Link to="/custom" className="btn-primary mt-5 px-5 text-sm" data-testid="promo-custom-cta">Request a Custom Hat <ArrowRight className="h-4 w-4" /></Link>
-      </Panel>
-      <Panel i={1} img={IMAGES.panelStory} imgPos="center" testId="promo-story">
+    <div className="mx-auto grid max-w-[1440px] gap-4 lg:grid-cols-2">
+      <Panel i={0} img={IMAGES.panelStory} imgPos="center" testId="promo-story">
         <PanelTitle>The Story</PanelTitle>
         <PanelText>Handcrafted hats.<br />Real stories.</PanelText>
         <Link to="/story" className="btn-primary mt-5 px-5 text-sm" data-testid="promo-story-cta">Our Story <ArrowRight className="h-4 w-4" /></Link>
       </Panel>
-      <Panel i={2} img={IMAGES.panelTouch} imgPos="right center" align="left" testId="promo-newsletter">
+      <Panel i={1} img={IMAGES.panelTouch} imgPos="right center" align="left" testId="promo-newsletter">
         <PanelTitle>Keep in Touch</PanelTitle>
-        <PanelText>Be the first to see new hats,<br />custom pieces and upcoming events.</PanelText>
+        <PanelText>Be the first to see new hats<br />and upcoming events.</PanelText>
         <Newsletter />
       </Panel>
     </div>

@@ -9,19 +9,11 @@ const Maple = (p) => (
     <path d="M12 2l1.6 3.4 2-1-.6 4.2 2.6-2.2.6 1.8 2.8-.6-1 3 1.6.8-4.4 3.6.6 1.8-4.2-.6V22h-1.2v-5.8l-4.2.6.6-1.8L3.8 11.4l1.6-.8-1-3 2.8.6.6-1.8L10.4 8.6 9.8 4.4l2 1z" />
   </svg>
 );
-const HatIcon = (p) => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" {...p}>
-    <path d="M2 15c3 2.5 17 2.5 20 0" />
-    <path d="M6.5 15c0-4 1.5-8 3.5-8 1 0 1.3 1 2 1s1-1 2-1c2 0 3.5 4 3.5 8" />
-    <path d="M7 12.5c3 1 7 1 10 0" />
-  </svg>
-);
 
 const BENEFITS = [
   { icon: Star, label: ["One of a Kind", "Designs"] },
   { icon: Hammer, label: ["Handcrafted", "in Small Batches"] },
   { icon: Maple, label: ["Canadian", "Made"] },
-  { icon: HatIcon, label: ["Custom", "Orders Available"] },
 ];
 
 const ease = [0.22, 1, 0.36, 1];
@@ -78,18 +70,12 @@ export const Hero = () => (
         <motion.p {...rise(0.85)} className="mt-3 text-[11px] font-medium uppercase tracking-[0.26em] text-[#EFE3CC] sm:text-base lg:ml-10 lg:mt-5 lg:tracking-[0.3em]" data-testid="hero-secondary-tagline">
           One of a Kind. Handcrafted. No Rules.
         </motion.p>
-        <motion.div {...rise(1)} className="mt-4 grid grid-cols-2 gap-3 sm:flex sm:items-center sm:justify-center sm:gap-4 lg:ml-20 lg:mt-7 lg:justify-start">
-          <Link to="/shop" className="btn-primary group h-[50px] min-h-0 w-full whitespace-nowrap px-3 text-sm tracking-[0.12em] sm:h-auto sm:min-h-[48px] sm:w-auto sm:px-8 sm:text-base sm:tracking-[0.18em]" data-testid="hero-shop-cta">
+        <motion.div {...rise(1)} className="mt-4 flex justify-center lg:ml-20 lg:mt-7 lg:justify-start">
+          <Link to="/shop" className="btn-primary group h-[50px] min-h-0 w-full max-w-[280px] whitespace-nowrap px-3 text-sm tracking-[0.14em] sm:h-auto sm:min-h-[48px] sm:w-auto sm:px-10 sm:text-base sm:tracking-[0.18em]" data-testid="hero-shop-cta">
             Shop Now <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
           </Link>
-          <Link to="/custom" className="btn-ghost h-[50px] min-h-0 whitespace-nowrap bg-[#0D0B08] px-3 font-rye text-sm font-normal tracking-[0.12em] shadow-[0_0_0_3px_rgba(13,11,8,0.9),0_0_0_4px_rgba(200,125,83,0.35)] sm:hidden" data-testid="hero-custom-cta-mobile">
-            Custom Hats <ArrowRight className="h-4 w-4" />
-          </Link>
-          <Link to="/custom" className="group hidden min-h-[48px] items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-[#EFE3CC] underline decoration-[#C87D53]/60 underline-offset-8 transition-colors hover:text-[#D9935F] sm:inline-flex" data-testid="hero-custom-cta">
-            Create a Custom Hat
-          </Link>
         </motion.div>
-        <motion.ul {...rise(1.15)} className="mt-6 grid grid-cols-4 gap-1.5 sm:gap-6 lg:mt-10 lg:max-w-[600px]" data-testid="hero-benefits">
+        <motion.ul {...rise(1.15)} className="mx-auto mt-6 grid max-w-[360px] grid-cols-3 gap-2 sm:gap-6 lg:mx-0 lg:mt-10 lg:max-w-[460px]" data-testid="hero-benefits">
           {BENEFITS.map(({ icon: Icon, label }, i) => (
             <li key={i} className="flex flex-col items-center text-center" data-testid={`hero-benefit-${i}`}>
               <span className="flex h-9 w-9 items-center justify-center rounded-full border border-[#C87D53]/80 text-[#C87D53] sm:h-12 sm:w-12">

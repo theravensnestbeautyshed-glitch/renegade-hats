@@ -32,18 +32,18 @@ export const IMAGES = {
 export const NAV = [
   { to: "/", label: "Home", id: "home", end: true },
   { to: "/shop", label: "Shop", id: "shop" },
-  { to: "/custom", label: "Custom Hats", id: "custom" },
   { to: "/story", label: "About", id: "story" },
   { to: "/gallery", label: "Gallery", id: "gallery" },
   { to: "/contact", label: "Contact", id: "contact" },
 ];
 
 export const FOOTER_LINKS = [
-  { to: "/faq", label: "FAQs", id: "faq" },
-  { to: "/shipping", label: "Shipping", id: "shipping" },
-  { to: "/shipping#returns", label: "Returns", id: "returns" },
-  { to: "/privacy", label: "Privacy", id: "privacy" },
+  { to: "/shop", label: "Shop", id: "shop" },
+  { to: "/story", label: "About", id: "story" },
   { to: "/contact", label: "Contact", id: "contact" },
+  { to: "/shipping", label: "Shipping & Returns", id: "shipping" },
+  { to: "/faq", label: "FAQs", id: "faq" },
+  { to: "/privacy", label: "Privacy", id: "privacy" },
 ];
 
 export const GALLERY = [
@@ -64,7 +64,7 @@ export const GALLERY = [
   { src: IMAGES.red, title: "Renegade Red", tag: "Collection", tall: true },
   { src: IMAGES.burn, title: "Fire & Felt", tag: "Workshop" },
   { src: IMAGES.coast, title: "Pacific Wanderer", tag: "Worn", tall: true },
-  { src: IMAGES.jolly, title: "Jolly Roger Custom", tag: "Custom" },
+  { src: IMAGES.jolly, title: "Jolly Roger", tag: "Details" },
   { src: IMAGES.shaman, title: "The Shaman", tag: "Collection", tall: true },
   { src: IMAGES.midnight, title: "Midnight Renegade", tag: "Collection", tall: true },
   { src: IMAGES.workshop, title: "The Bench", tag: "Workshop" },
@@ -73,22 +73,11 @@ export const GALLERY = [
   { src: IMAGES.hero, title: "Dusk Rider", tag: "Worn" },
 ];
 
-export const CUSTOM_STEPS = [
-  { n: "01", title: "Choose your hat", text: "Start with a shape and felt that suits the way you move." },
-  { n: "02", title: "Choose your colours", text: "Smoke black, oxblood, sand, charcoal, or something only you would pick." },
-  { n: "03", title: "Choose your band", text: "Braided leather, studs, turquoise, copper, bone beads." },
-  { n: "04", title: "Add the details", text: "Feathers, conchos, leather, hand-painted artwork, skulls and charms." },
-  { n: "05", title: "Build it together", text: "Work directly with Renegade Hats to create something completely unique." },
-];
-
 export const FAQS = [
   { q: "Are the hats one of a kind?", a: "Yes. Every Renegade Hat is individually distressed, decorated and finished by hand. Even when two hats share a name or a style, no two are ever identical. When you buy one, it's the only one." },
-  { q: "Can I order a custom hat?", a: "Absolutely. Head to the Custom Hats page and tell us about your vision — colours, band, feathers, conchos, artwork, the feeling you want it to carry. We'll reach out to talk through the details and a quote." },
-  { q: "How long do custom hats take?", a: "Most custom hats take 2–4 weeks from the time your design is confirmed, depending on the complexity of the work and the materials involved. We'll give you a realistic timeline before we begin." },
   { q: "Do you ship?", a: "Yes. We ship across Canada and to the United States. Every hat is packed carefully in a sturdy box so it arrives with its shape intact. See Shipping & Returns for details." },
   { q: "Where are Renegade Hats made?", a: "Every hat is made by hand in our small workshop in Powell River, British Columbia, Canada." },
-  { q: "Can I request specific colours or details?", a: "Yes — that's the whole point of a custom hat. Bring us colours, symbols, a feather you've been saving, a song lyric, a reference photo. If it can be done by hand, we'll try." },
-  { q: "What happens if a hat sells out?", a: "Because each hat is one of a kind, once it sells it's gone for good and will be marked SOLD OUT. If you loved it, request a custom hat inspired by it — it won't be a copy, but it will carry the same spirit." },
+  { q: "What happens if a hat sells out?", a: "Because each hat is one of a kind, once it sells it's gone for good and will be marked SOLD OUT. Keep an eye on the shop — new one-of-a-kind hats are added as they're finished." },
   { q: "How do I find my hat size?", a: "Measure around your head about a finger's width above your ears and eyebrows. Send us the measurement in centimetres or inches and we'll help you find the right fit." },
 ];
 

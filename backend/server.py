@@ -54,30 +54,12 @@ class Product(BaseDocument):
     price: float
     currency: str = "CAD"
     tagline: str = ""
+    subtitle: str = ""
     description: str
     details: List[str] = []
     images: List[str] = []
     sold: bool = False
     order: int = 0
-
-
-class CustomRequestIn(BaseModel):
-    name: str = Field(min_length=1)
-    email: EmailStr
-    phone: Optional[str] = ""
-    base_hat: str = ""
-    colours: str = ""
-    band: str = ""
-    details: List[str] = []
-    head_size: str = ""
-    budget: str = ""
-    vision: str = Field(min_length=1)
-    reference_hat: Optional[str] = ""
-
-
-class CustomRequest(BaseDocument, CustomRequestIn):
-    created_at: str = Field(default_factory=now)
-    status: str = "new"
 
 
 class ContactIn(BaseModel):
@@ -143,13 +125,6 @@ async def get_product(slug: str):
     if not doc:
         raise HTTPException(404, "Hat not found")
     return Product.from_mongo(doc)
-
-
-@api.post("/custom-requests")
-async def create_custom(req: CustomRequestIn):
-    item = CustomRequest(**req.model_dump())
-    await db.custom_requests.insert_one(item.to_mongo())
-    return {"ok": True}
 
 
 @api.post("/contact")
@@ -253,13 +228,11 @@ def check_admin(passcode: Optional[str]):
 @api.get("/admin/data")
 async def admin_data(x_admin_passcode: Optional[str] = Header(None)):
     check_admin(x_admin_passcode)
-    customs = await db.custom_requests.find().sort("created_at", -1).to_list(500)
     contacts = await db.contact_messages.find().sort("created_at", -1).to_list(500)
     orders = await db.payment_transactions.find({"payment_status": "paid"}).sort("created_at", -1).to_list(500)
     subs = await db.newsletter.find({}, {"_id": 0}).sort("created_at", -1).to_list(2000)
     return {
         "subscribers": subs,
-        "custom_requests": [CustomRequest.from_mongo(d).model_dump() for d in customs],
         "contacts": [ContactMessage.from_mongo(d).model_dump() for d in contacts],
         "orders": [Transaction.from_mongo(d).model_dump() for d in orders],
     }

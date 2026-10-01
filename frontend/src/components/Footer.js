@@ -30,7 +30,7 @@ export const Footer = () => (
           <span className="h-px w-10 bg-[#C87D53]/70 sm:w-24" />
         </div>
         <p className="mt-2 text-[11px] font-semibold uppercase tracking-[0.25em] text-[#C9B9A0]">One of a Kind. Handcrafted. No Rules.</p>
-        <p className="mt-1 text-[11px] uppercase tracking-[0.2em] text-[#A3978C]" data-testid="footer-location">Powell River, British Columbia, Canada</p>
+        <p className="mt-1 text-xs tracking-[0.08em] text-[#B9AC9C]" data-testid="footer-location">Handcrafted in Powell River, British Columbia, Canada 🇨🇦</p>
       </div>
       <nav className="order-3 flex flex-wrap justify-center gap-x-1 gap-y-2 lg:justify-end">
         {FOOTER_LINKS.map((l, i) => (

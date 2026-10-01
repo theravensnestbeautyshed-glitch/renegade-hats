@@ -4,7 +4,7 @@ import { PageHeader } from "../components/PageHeader";
 import { Reveal } from "../components/Motion";
 import { GALLERY, IMAGES } from "../data/content";
 
-const TAGS = ["All", "Collection", "Custom", "Worn", "Workshop", "Details"];
+const TAGS = ["All", "Collection", "Worn", "Workshop", "Details"];
 
 export default function Gallery() {
   const [tag, setTag] = useState("All");

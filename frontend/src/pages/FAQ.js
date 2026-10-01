@@ -7,7 +7,7 @@ import { FAQS } from "../data/content";
 export default function FAQ() {
   return (
     <div data-testid="faq-page">
-      <PageHeader eyebrow="FAQ" lines={["Questions,", "Answered."]} intro="Everything you need to know about our one-of-a-kind hats, custom orders and shipping." />
+      <PageHeader eyebrow="FAQ" lines={["Questions,", "Answered."]} intro="Everything you need to know about our one-of-a-kind hats, orders and shipping." />
       <section className="mx-auto max-w-4xl px-5 pb-28 sm:px-8">
         <Reveal>
           <Accordion type="single" collapsible className="border-t border-[#C87D53]/20">

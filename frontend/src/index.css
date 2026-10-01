@@ -104,6 +104,7 @@ body {
 }
 .marquee-track { animation: marquee 60s linear infinite; }
 
+@layer components {
 .btn-primary {
     @apply inline-flex min-h-[48px] items-center justify-center gap-3 px-8 py-3 text-base uppercase tracking-[0.18em];
     font-family: "Smokum", serif;
@@ -135,6 +136,7 @@ body {
 .field:focus { border-color: var(--copper); background: rgba(200, 125, 83, 0.06); }
 .field::placeholder { color: #8a7f74; }
 select.field option { background: var(--leather); }
+}
 
 @layer base {
     :root {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowLeft, Check, Truck, Feather } from "lucide-react";
+import { ArrowLeft, Check, Truck } from "lucide-react";
 import { api, formatCAD } from "../lib/api";
 import { useCart } from "../context/CartContext";
 import { Eyebrow, Reveal } from "../components/Motion";
@@ -97,9 +97,6 @@ export default function Product() {
                 <button onClick={() => add(p)} disabled={p.sold || inCart} className="btn-primary w-full" data-testid="product-add-to-cart">
                   {p.sold ? "Sold Out" : inCart ? "In Your Cart" : `Add to Cart — ${formatCAD(p.price)}`}
                 </button>
-                <Link to={`/custom?ref=${p.slug}`} className="btn-ghost w-full" data-testid="product-custom-inquiry">
-                  <Feather className="h-4 w-4" /> Request a Custom Version
-                </Link>
               </div>
               <p className="mt-6 flex items-center gap-2 text-xs text-[#A3978C]">
                 <Truck className="h-4 w-4" /> Ships across Canada & the U.S. · <Link to="/shipping" className="underline hover:text-[#C87D53]">Shipping & Returns</Link>

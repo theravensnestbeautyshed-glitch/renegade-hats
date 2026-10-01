@@ -31,7 +31,7 @@ export default function Contact() {
 
   return (
     <div data-testid="contact-page">
-      <PageHeader eyebrow="Contact" lines={["Send Word", "Down the Trail."]} intro="Questions, orders, custom requests or just want to talk hats — we read every message." />
+      <PageHeader eyebrow="Contact" lines={["Send Word", "Down the Trail."]} intro="Questions, orders or just want to talk hats — we read every message." />
       <section className="mx-auto grid max-w-[1440px] gap-14 px-5 pb-28 sm:px-8 lg:grid-cols-12 lg:px-12">
         <Reveal className="lg:col-span-7">
           <form onSubmit={submit} className="notch leather-bg space-y-6 p-6 sm:p-10" data-testid="contact-form">
@@ -65,7 +65,7 @@ export default function Contact() {
             <MapPin className="mt-1 h-5 w-5 text-[#C87D53]" />
             <span>Powell River, British Columbia, Canada</span>
           </p>
-          <p className="mt-4 text-[#A3978C]">Workshop visits by appointment only. Custom hat requests are best started through the Custom Hats page.</p>
+          <p className="mt-4 text-[#A3978C]">Workshop visits by appointment only.</p>
           <div className="copper-rule my-10" />
           <Eyebrow className="mb-6">Follow the Trail</Eyebrow>
           <div className="flex flex-col gap-3">

@@ -47,9 +47,8 @@ export default function Story() {
           <div className="leather-bg notch px-6 py-16 text-center sm:px-16 sm:py-24">
             <Eyebrow className="mb-6">The Creed</Eyebrow>
             <p className="font-rye mx-auto max-w-3xl text-3xl leading-tight sm:text-5xl">One of a Kind.<br />Handcrafted.<br /><span className="text-[#C87D53]">No Rules.</span></p>
-            <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
+            <div className="mt-10 flex justify-center">
               <Link to="/shop" className="btn-primary" data-testid="story-shop-cta">Shop the Collection</Link>
-              <Link to="/custom" className="btn-ghost" data-testid="story-custom-cta">Create a Custom Hat</Link>
             </div>
           </div>
         </Reveal>

@@ -58,7 +58,6 @@ export default function Admin() {
       </div>
     );
 
-  const customs = data.custom_requests || [];
   const contacts = data.contacts || [];
   const orders = data.orders || [];
   const subs = data.subscribers || [];
@@ -71,7 +70,7 @@ export default function Admin() {
       </div>
       <Tabs defaultValue="hats">
         <TabsList className="mb-6 flex h-auto flex-wrap justify-start gap-1 bg-transparent p-0">
-          {[["hats", `Hats (${products.length})`], ["custom", `Custom (${customs.length})`], ["messages", `Messages (${contacts.length})`], ["orders", `Orders (${orders.length})`], ["subs", `Subscribers (${subs.length})`]].map(([v, l]) => (
+          {[["hats", `Hats (${products.length})`], ["messages", `Messages (${contacts.length})`], ["orders", `Orders (${orders.length})`], ["subs", `Subscribers (${subs.length})`]].map(([v, l]) => (
             <TabsTrigger key={v} value={v} className="border border-[#C87D53]/25 px-4 py-2 text-xs uppercase tracking-[0.15em] data-[state=active]:bg-[#C87D53] data-[state=active]:text-[#0D0B08]" data-testid={`admin-tab-${v}`}>{l}</TabsTrigger>
           ))}
         </TabsList>
@@ -89,19 +88,6 @@ export default function Admin() {
                   <Switch checked={!!p.sold} onCheckedChange={(v) => toggleSold(p.slug, v)} data-testid={`admin-sold-toggle-${p.slug}`} />
                 </label>
               </div>
-            </Card>
-          ))}
-        </TabsContent>
-        <TabsContent value="custom" className="space-y-3">
-          {customs.length === 0 ? <Empty /> : customs.map((c) => (
-            <Card key={c.id} testId={`admin-custom-${c.id}`}>
-              <div className="flex flex-wrap justify-between gap-2">
-                <p className="font-cinzel text-lg font-bold">{c.name} · <span className="text-sm font-normal text-[#A3978C]">{c.email} {c.phone}</span></p>
-                <p className="font-mono-plex text-xs text-[#A3978C]">{new Date(c.created_at).toLocaleString()}</p>
-              </div>
-              <p className="mt-2 text-sm text-[#A3978C]">Base: {c.base_hat || "—"} · Colours: {c.colours || "—"} · Band: {c.band || "—"} · Size: {c.head_size || "—"} · Budget: {c.budget || "—"}</p>
-              {c.details?.length > 0 && <p className="mt-1 text-sm text-[#C87D53]">{c.details.join(" · ")}</p>}
-              <p className="mt-3 whitespace-pre-wrap">{c.vision}</p>
             </Card>
           ))}
         </TabsContent>
