@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { toast } from "sonner";
 import { Hero } from "../components/Hero";
-import { FavButton } from "../components/FavButton";
 import { useProducts } from "../hooks/useProducts";
 import { IMAGES } from "../data/content";
 import { api, formatCAD } from "../lib/api";
@@ -28,7 +27,6 @@ export const FeaturedCard = ({ p, i }) => (
     <Link to={`/shop/${p.slug}`} className="copper-frame group relative block bg-[#0A0806] transition-[border-color] duration-300 hover:border-[#C87D53]" data-testid={`featured-card-${p.slug}`}>
       <div className="relative aspect-[3/2.1] overflow-hidden">
         <img src={p.images?.[0]} alt={p.name} loading="lazy" className={`h-full w-full object-cover transition-transform duration-[1.2s] group-hover:scale-[1.07] ${p.sold ? "grayscale-[60%]" : ""}`} />
-        <FavButton slug={p.slug} className="absolute right-1 top-1" />
         {p.sold && <span className="font-rye absolute bottom-2 left-2 border border-[#b23a2a] bg-[#0D0B08]/80 px-2 py-0.5 text-xs text-[#e0573f]">SOLD OUT</span>}
       </div>
       <div className="px-2 py-3 text-center">

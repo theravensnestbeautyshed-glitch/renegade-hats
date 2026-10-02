@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import { ArrowRight, ShoppingCart } from "lucide-react";
 import { useProducts } from "../hooks/useProducts";
 import { useCart } from "../context/CartContext";
-import { FavButton } from "../components/FavButton";
 import { SkullDivider } from "../components/Logo";
 import { IMAGES } from "../data/content";
 import { formatCAD } from "../lib/api";
@@ -28,7 +27,6 @@ const ShopCard = ({ p, i }) => {
         <span className="pointer-events-none absolute left-2 top-2 border border-[#C87D53]/70 bg-[#0D0B08]/80 px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#EFE3CC] backdrop-blur-sm sm:left-3 sm:top-3 sm:text-[11px]" data-testid={`product-ooak-badge-${p.slug}`}>
           One of a Kind
         </span>
-        <FavButton slug={p.slug} className="absolute right-0.5 top-0.5" />
         {p.sold && (
           <span className="font-rye pointer-events-none absolute bottom-3 left-1/2 -translate-x-1/2 -rotate-3 border-2 border-[#b23a2a] bg-[#0D0B08]/85 px-3 py-1 text-sm text-[#e0573f]" data-testid={`product-sold-badge-${p.slug}`}>
             SOLD OUT
@@ -36,10 +34,12 @@ const ShopCard = ({ p, i }) => {
         )}
       </div>
       <div className="flex flex-1 flex-col px-3 pb-3 pt-3 text-center sm:px-4 sm:pb-4">
-        <h3 className="font-caslon text-[13px] font-bold uppercase tracking-[0.14em] text-[#EFE3CC] sm:text-base">{p.name}</h3>
+        <Link to={`/shop/${p.slug}`} className="transition-colors hover:text-[#D9935F]" data-testid={`product-name-link-${p.slug}`}>
+          <h3 className="font-caslon text-[13px] font-bold uppercase tracking-[0.14em] text-[#EFE3CC] sm:text-base">{p.name}</h3>
+        </Link>
         <p className="mt-1 text-xs leading-snug text-[#B9AC9C] sm:text-sm">{p.subtitle}</p>
         <p className="font-caslon mt-2 text-sm font-bold tracking-[0.08em] text-[#D9935F] sm:text-base" data-testid={`product-price-${p.slug}`}>{formatCAD(p.price)}</p>
-        <div className="mt-3 flex gap-1.5 sm:gap-2">
+        <div className="mt-auto flex gap-1.5 pt-3 sm:gap-2">
           <Link to={`/shop/${p.slug}`} className="btn-ghost min-h-[44px] min-w-0 flex-1 gap-1 whitespace-nowrap px-1.5 text-[11px] tracking-[0.1em] sm:gap-1.5 sm:px-2 sm:tracking-[0.14em]" data-testid={`product-view-button-${p.slug}`}>
             View Hat <ArrowRight className="h-3.5 w-3.5" />
           </Link>
@@ -108,10 +108,24 @@ export default function Shop() {
         ) : products.length === 0 ? (
           <p className="py-10 text-center text-[#A3978C]" data-testid="shop-empty">No hats here right now.</p>
         ) : (
+          <>
           <div id="collection" className="grid scroll-mt-24 grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-3" data-testid="shop-grid">
             {products.map((p, i) => <ShopCard key={p.slug} p={p} i={i} />)}
             <OnlyOne />
           </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.8 }}
+            className="mt-14 border-t border-[#C87D53]/25 pt-12 text-center"
+            data-testid="shop-next-renegade"
+          >
+            <h2 className="font-rye text-3xl uppercase leading-tight text-[#EFE3CC] sm:text-4xl">Don’t See Your Next Renegade?</h2>
+            <SkullDivider className="mx-auto mt-4 max-w-[240px]" />
+            <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-[#E2D4BD]">Our collection changes as new one-of-a-kind hats are created.</p>
+          </motion.div>
+          </>
         )}
       </section>
     </div>
