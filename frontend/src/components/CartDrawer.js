@@ -10,6 +10,7 @@ export const CartDrawer = () => {
   const { items, remove, total, open, setOpen } = useCart();
   const [loading, setLoading] = useState(false);
   const [soldSlugs, setSoldSlugs] = useState([]);
+  const [pendingUrl, setPendingUrl] = useState("");
 
   useEffect(() => {
     if (!open || !items.length) return undefined;
@@ -31,7 +32,21 @@ export const CartDrawer = () => {
       const { data } = await api.post("/payments/checkout", { slugs: items.map((i) => i.slug), origin_url: window.location.origin, previous_session_id: sessionStorage.getItem("renegade_checkout_sid") || undefined });
       if (data?.checkout_url) {
         sessionStorage.setItem("renegade_checkout_sid", data.session_id);
-        window.location.href = data.checkout_url;
+        if (window.self === window.top) {
+          window.location.href = data.checkout_url;
+          return;
+        }
+        // Stripe Checkout cannot render inside an iframe (e.g. the editor preview), so open it in its own tab.
+        const w = window.open(data.checkout_url, "_blank");
+        if (!w) {
+          try {
+            window.top.location.href = data.checkout_url;
+          } catch {
+            /* fall through to manual link */
+          }
+        }
+        setPendingUrl(data.checkout_url);
+        setLoading(false);
       }
     } catch (e) {
       toast.error(e?.response?.data?.detail || "Checkout is unavailable right now.");
@@ -92,6 +107,12 @@ export const CartDrawer = () => {
             <button onClick={checkout} disabled={loading || unavailable.length > 0} className="btn-primary h-[56px] w-full" data-testid="cart-checkout-button">
               <Lock className="h-4 w-4" /> {loading ? "Opening checkout…" : "Checkout"}
             </button>
+            {pendingUrl && (
+              <p className="mt-3 text-center text-xs text-[#B9AC9C]" data-testid="cart-checkout-newtab-note">
+                Checkout opened in a new tab.{" "}
+                <a href={pendingUrl} target="_blank" rel="noreferrer" className="text-[#D9935F] underline underline-offset-4" data-testid="cart-checkout-newtab-link">Didn’t open? Tap here.</a>
+              </p>
+            )}
           </div>
         )}
       </SheetContent>
