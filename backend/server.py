@@ -1,4 +1,8 @@
-from fastapi import FastAPI, APIRouter, HTTPException, Request, Header
+from fastapi import FastAPI, APIRouter, HTTPException, Request, Header, UploadFile, File
+from fastapi.responses import Response
+from starlette.concurrency import run_in_threadpool
+import re
+import uuid
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -16,6 +20,8 @@ ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
 from catalog import HATS  # noqa: E402
+from stripe_catalog import sync_hat, archive_hat  # noqa: E402
+import storage  # noqa: E402
 
 client = AsyncIOMotorClient(os.environ['MONGO_URL'])
 db = client[os.environ['DB_NAME']]
@@ -107,15 +113,41 @@ class SoldIn(BaseModel):
     sold: bool
 
 
+class ProductIn(BaseModel):
+    name: str = Field(min_length=1, max_length=80)
+    price: float = Field(gt=0, le=100000)
+    subtitle: str = ""
+    tagline: str = ""
+    description: str = Field(min_length=1)
+    story: str = ""
+    size: str = ""
+    material: str = ""
+    colour: str = ""
+    hatband: str = ""
+    handmade: str = "Handmade in Powell River, BC"
+    details: List[str] = []
+    images: List[str] = Field(min_length=1)
+    sold: bool = False
+    order: Optional[int] = None
+
+
+IMAGE_TYPES = {"image/jpeg": "jpg", "image/png": "png", "image/webp": "webp", "image/heic": "heic", "image/heif": "heif"}
+MAX_UPLOAD = 15 * 1024 * 1024
+
+
+def slugify(name: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-") or "hat"
+
+
 @app.on_event("startup")
 async def seed():
-    for h in HATS:
-        existing = await db.products.find_one({"slug": h["slug"]})
-        fields = {k: v for k, v in h.items()}
-        if existing:
-            await db.products.update_one({"slug": h["slug"]}, {"$set": fields})
-        else:
-            await db.products.insert_one(Product(**fields).to_mongo())
+    if await db.products.count_documents({}) == 0:
+        for h in HATS:
+            await db.products.insert_one(Product(**h).to_mongo())
+    try:
+        await run_in_threadpool(storage.init_storage)
+    except Exception as e:  # noqa: BLE001
+        logger.error("Storage init failed: %s", e)
 
 
 @api.get("/")
@@ -281,6 +313,78 @@ async def admin_set_sold(slug: str, body: SoldIn, x_admin_passcode: Optional[str
     res = await db.products.update_one({"slug": slug}, {"$set": {"sold": body.sold}})
     if not res.matched_count:
         raise HTTPException(404, "Hat not found")
+    return {"ok": True}
+
+
+@api.post("/admin/upload")
+async def admin_upload(file: UploadFile = File(...), x_admin_passcode: Optional[str] = Header(None)):
+    check_admin(x_admin_passcode)
+    ext = IMAGE_TYPES.get(file.content_type or "")
+    if not ext:
+        raise HTTPException(400, "Please upload a JPG, PNG, WEBP or HEIC photo")
+    data = await file.read()
+    if len(data) > MAX_UPLOAD:
+        raise HTTPException(400, "Photo is larger than 15 MB")
+    path = f"{storage.APP_NAME}/hats/{uuid.uuid4()}.{ext}"
+    result = await run_in_threadpool(storage.put_object, path, data, file.content_type)
+    await db.files.insert_one({"storage_path": result["path"], "original_filename": file.filename,
+                               "content_type": file.content_type, "size": result.get("size"),
+                               "is_deleted": False, "created_at": now()})
+    return {"url": f"/api/files/{result['path']}"}
+
+
+@api.get("/files/{path:path}")
+async def serve_file(path: str):
+    record = await db.files.find_one({"storage_path": path, "is_deleted": False})
+    if not record:
+        raise HTTPException(404, "File not found")
+    data, ctype = await run_in_threadpool(storage.get_object, path)
+    return Response(content=data, media_type=record.get("content_type") or ctype,
+                    headers={"Cache-Control": "public, max-age=31536000, immutable"})
+
+
+@api.post("/admin/products", response_model=Product, response_model_by_alias=False)
+async def admin_create_product(body: ProductIn, x_admin_passcode: Optional[str] = Header(None)):
+    check_admin(x_admin_passcode)
+    base = slugify(body.name)
+    slug, n = base, 2
+    while await db.products.find_one({"slug": slug}):
+        slug, n = f"{base}-{n}", n + 1
+    fields = body.model_dump()
+    if fields["order"] is None:
+        last = await db.products.find_one(sort=[("order", -1)])
+        fields["order"] = (last or {}).get("order", 0) + 1
+    await run_in_threadpool(sync_hat, slug, body.name, body.price, body.images[0])
+    product = Product(slug=slug, **fields)
+    res = await db.products.insert_one(product.to_mongo())
+    return Product.from_mongo(await db.products.find_one({"_id": res.inserted_id}))
+
+
+@api.put("/admin/products/{slug}", response_model=Product, response_model_by_alias=False)
+async def admin_update_product(slug: str, body: ProductIn, x_admin_passcode: Optional[str] = Header(None)):
+    check_admin(x_admin_passcode)
+    existing = await db.products.find_one({"slug": slug})
+    if not existing:
+        raise HTTPException(404, "Hat not found")
+    fields = body.model_dump()
+    if fields["order"] is None:
+        fields["order"] = existing.get("order", 0)
+    if existing.get("price") != body.price or existing.get("name") != body.name:
+        await run_in_threadpool(sync_hat, slug, body.name, body.price, body.images[0])
+    await db.products.update_one({"slug": slug}, {"$set": fields})
+    return Product.from_mongo(await db.products.find_one({"slug": slug}))
+
+
+@api.delete("/admin/products/{slug}")
+async def admin_delete_product(slug: str, x_admin_passcode: Optional[str] = Header(None)):
+    check_admin(x_admin_passcode)
+    res = await db.products.delete_one({"slug": slug})
+    if not res.deleted_count:
+        raise HTTPException(404, "Hat not found")
+    try:
+        await run_in_threadpool(archive_hat, slug)
+    except stripe.error.StripeError as e:
+        logger.warning("archive failed: %s", e.user_message)
     return {"ok": True}
 
 

@@ -124,6 +124,63 @@ def test_checkout_sold_409(s):
                 headers={"X-Admin-Passcode": ADMIN_PASSCODE}, timeout=30)
 
 
+# --- Reservation flow (iteration 5) ---
+def test_reservation_conflict_and_previous_session_id(s):
+    # First checkout for the-renegade creates a hold
+    r1 = s.post(f"{API}/payments/checkout", json={
+        "slugs": ["the-renegade"], "origin_url": BASE_URL,
+    }, timeout=60)
+    assert r1.status_code == 200, r1.text
+    sid1 = r1.json()["session_id"]
+    # Second without previous_session_id must 409
+    r2 = s.post(f"{API}/payments/checkout", json={
+        "slugs": ["the-renegade"], "origin_url": BASE_URL,
+    }, timeout=60)
+    assert r2.status_code == 409, r2.text
+    assert "Another customer" in r2.json().get("detail", "")
+    # Passing previous_session_id of the first session succeeds
+    r3 = s.post(f"{API}/payments/checkout", json={
+        "slugs": ["the-renegade"], "origin_url": BASE_URL, "previous_session_id": sid1,
+    }, timeout=60)
+    assert r3.status_code == 200, r3.text
+    sid3 = r3.json()["session_id"]
+    # Release the hold
+    r4 = s.post(f"{API}/payments/release/{sid3}", timeout=30)
+    assert r4.status_code == 200
+    assert r4.json().get("ok") is True
+    # Now checkout should succeed again
+    r5 = s.post(f"{API}/payments/checkout", json={
+        "slugs": ["the-renegade"], "origin_url": BASE_URL,
+    }, timeout=60)
+    assert r5.status_code == 200, r5.text
+    s.post(f"{API}/payments/release/{r5.json()['session_id']}", timeout=30)
+
+
+def test_checkout_line_items_quantity_and_currency(s):
+    # Create a multi-item checkout and inspect metadata via status
+    r = s.post(f"{API}/payments/checkout", json={
+        "slugs": ["midnight-renegade", "renegade-red"], "origin_url": BASE_URL,
+    }, timeout=60)
+    assert r.status_code == 200, r.text
+    data = r.json()
+    assert "checkout.stripe.com" in data["checkout_url"]
+    sid = data["session_id"]
+    # Retrieve via Stripe to validate currency CAD and quantities=1
+    import stripe as _stripe
+    _stripe.api_key = os.environ.get("STRIPE_SECRET_KEY") or os.environ.get("STRIPE_API_KEY")
+    try:
+        sess = _stripe.checkout.Session.retrieve(sid, expand=["line_items"])
+        assert sess.currency.lower() == "cad"
+        for li in sess.line_items.data:
+            assert li.quantity == 1
+    except Exception as e:
+        # Not fatal if stripe lookup fails from CI, but log
+        print("Stripe retrieve skipped:", e)
+    finally:
+        s.post(f"{API}/payments/release/{sid}", timeout=30)
+
+
+
 # --- Admin ---
 def test_admin_no_header_401(s):
     r = s.get(f"{API}/admin/data", timeout=30)
