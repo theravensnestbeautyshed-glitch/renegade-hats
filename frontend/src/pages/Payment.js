@@ -24,6 +24,7 @@ export function PaymentSuccess() {
         if (data?.payment_status === "paid") {
           setState("paid");
           clear();
+          sessionStorage.removeItem("renegade_checkout_sid");
           return;
         }
         if (data?.status === "expired") {
@@ -52,7 +53,7 @@ export function PaymentSuccess() {
   }[state];
 
   return (
-    <div className="mx-auto flex min-h-[80vh] max-w-2xl flex-col items-center justify-center px-5 pt-28 text-center" data-testid="payment-success-page">
+    <div className="tex-leather flex min-h-[70vh] flex-col items-center justify-center px-5 py-16 text-center" data-testid="payment-success-page">
       <h1 className="font-rye text-5xl text-[#C87D53] sm:text-6xl" data-testid="payment-status-title">{copy[0]}</h1>
       <p className="mt-6 text-lg text-[#F2EADB]/85" data-testid="payment-status-text">{copy[1]}</p>
       <Link to="/shop" className="btn-ghost mt-10" data-testid="payment-back-shop">Back to the Shop</Link>
@@ -61,10 +62,17 @@ export function PaymentSuccess() {
 }
 
 export function PaymentCancel() {
+  useEffect(() => {
+    const sid = sessionStorage.getItem("renegade_checkout_sid");
+    if (sid) {
+      sessionStorage.removeItem("renegade_checkout_sid");
+      api.post(`/payments/release/${sid}`).catch(() => {});
+    }
+  }, []);
   return (
-    <div className="mx-auto flex min-h-[80vh] max-w-2xl flex-col items-center justify-center px-5 pt-28 text-center" data-testid="payment-cancel-page">
+    <div className="tex-leather flex min-h-[70vh] flex-col items-center justify-center px-5 py-16 text-center" data-testid="payment-cancel-page">
       <h1 className="font-rye text-5xl text-[#C87D53] sm:text-6xl">Checkout Cancelled</h1>
-      <p className="mt-6 text-lg text-[#F2EADB]/85">No charge was made. Your hats are still waiting in your cart — but they won't wait forever.</p>
+      <p className="mt-6 text-lg text-[#F2EADB]/85">No charge was made. Your hats are still in your cart and have been released for checkout again.</p>
       <Link to="/shop" className="btn-primary mt-10" data-testid="payment-cancel-back">Return to Shop</Link>
     </div>
   );

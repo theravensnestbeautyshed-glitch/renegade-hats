@@ -7,7 +7,8 @@ import logging
 from pathlib import Path
 from pydantic import BaseModel, Field, EmailStr, BeforeValidator, ConfigDict
 from typing import List, Optional, Annotated
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
+import time
 from bson import ObjectId
 import stripe
 
@@ -22,6 +23,7 @@ stripe.api_key = os.environ["STRIPE_SECRET_KEY"]
 STRIPE_WEBHOOK_SECRET = os.environ["STRIPE_WEBHOOK_SECRET"]
 ADMIN_PASSCODE = os.environ["ADMIN_PASSCODE"]
 TAX_MODE = "calc_only"
+RESERVE_SECONDS = 31 * 60
 
 app = FastAPI()
 api = APIRouter(prefix="/api")
@@ -86,6 +88,7 @@ class Transaction(BaseDocument):
     currency: str = "cad"
     status: str = "initiated"
     payment_status: str = "pending"
+    reserved_until: Optional[str] = None
     created_at: str = Field(default_factory=now)
     updated_at: str = Field(default_factory=now)
 
@@ -93,6 +96,7 @@ class Transaction(BaseDocument):
 class CheckoutIn(BaseModel):
     slugs: List[str] = Field(min_length=1, max_length=20)
     origin_url: str
+    previous_session_id: Optional[str] = None
 
 
 class NewsletterIn(BaseModel):
@@ -166,6 +170,13 @@ async def checkout(req: CheckoutIn):
     sold = [d["name"] for d in docs if d.get("sold")]
     if sold:
         raise HTTPException(409, f"Already sold: {', '.join(sold)}")
+    if req.previous_session_id:
+        await release_reservation(req.previous_session_id)
+    held = await db.payment_transactions.find_one(
+        {"slugs": {"$in": slugs}, "status": "initiated", "reserved_until": {"$gt": now()}})
+    if held:
+        names = [d["name"] for d in docs if d["slug"] in held["slugs"]]
+        raise HTTPException(409, f"Another customer is checking out {', '.join(names)} right now. Please try again in a little while.")
     line_items = []
     for s in slugs:
         prices = stripe.Price.list(lookup_keys=[f"hat_{s}"], active=True, limit=1).data
@@ -178,6 +189,7 @@ async def checkout(req: CheckoutIn):
         cancel_url=f"{req.origin_url}/payment/cancel",
         shipping_address_collection={"allowed_countries": ["CA", "US"]},
         metadata={"slugs": ",".join(slugs)},
+        expires_at=int(time.time()) + RESERVE_SECONDS,
     )
     try:
         session = stripe.checkout.Session.create(**kwargs, automatic_tax={"enabled": True},
@@ -185,9 +197,28 @@ async def checkout(req: CheckoutIn):
     except stripe.error.InvalidRequestError as e:
         logger.warning("automatic tax unavailable, falling back: %s", e.user_message)
         session = stripe.checkout.Session.create(**kwargs)
-    tx = Transaction(session_id=session.id, slugs=slugs, amount=float(sum(d["price"] for d in docs)))
+    tx = Transaction(session_id=session.id, slugs=slugs, amount=float(sum(d["price"] for d in docs)),
+                     reserved_until=(datetime.now(timezone.utc) + timedelta(seconds=RESERVE_SECONDS)).isoformat())
     await db.payment_transactions.insert_one(tx.to_mongo())
     return {"checkout_url": session.url, "session_id": session.id}
+
+
+@api.post("/payments/release/{session_id}")
+async def release_reservation(session_id: str):
+    record = await db.payment_transactions.find_one({"session_id": session_id, "status": "initiated"})
+    if not record:
+        return {"ok": True}
+    try:
+        stripe.checkout.Session.expire(session_id)
+    except stripe.error.StripeError as e:
+        logger.info("expire skipped: %s", e.user_message)
+        s = stripe.checkout.Session.retrieve(session_id)
+        if s.payment_status == "paid":
+            await mark_paid(session_id, s.payment_intent)
+            return {"ok": True}
+    await db.payment_transactions.update_one({"session_id": session_id, "status": "initiated"},
+                                             {"$set": {"status": "expired", "payment_status": "expired", "updated_at": now()}})
+    return {"ok": True}
 
 
 @api.get("/payments/status/{session_id}")

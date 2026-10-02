@@ -121,7 +121,7 @@ export default function Shop() {
             className="mt-14 border-t border-[#C87D53]/25 pt-12 text-center"
             data-testid="shop-next-renegade"
           >
-            <h2 className="font-rye text-3xl uppercase leading-tight text-[#EFE3CC] sm:text-4xl">Don’t See Your Next Renegade?</h2>
+            <h2 className="font-rye text-3xl uppercase leading-tight text-[#EFE3CC] sm:text-4xl">Looking for Your Next Renegade?</h2>
             <SkullDivider className="mx-auto mt-4 max-w-[240px]" />
             <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-[#E2D4BD]">Our collection changes as new one-of-a-kind hats are created.</p>
           </motion.div>
