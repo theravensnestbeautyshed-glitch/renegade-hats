@@ -110,8 +110,7 @@ const Info = ({ p }) => (
       <ClaimButton p={p} />
     </div>
     <p className="mt-4 flex flex-wrap items-center gap-2 text-xs text-[#B9AC9C]">
-      <Truck className="h-4 w-4 text-[#C87D53]" /> Ships across Canada & the U.S. ·
-      <Link to="/shipping" className="underline underline-offset-4 hover:text-[#D9935F]" data-testid="product-shipping-link">Shipping & Returns</Link>
+      <Truck className="h-4 w-4 text-[#C87D53]" /> Ships across Canada & the U.S.
     </p>
   </div>
 );

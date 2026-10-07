@@ -24,13 +24,13 @@ const HeroImage = () => {
   const x = useSpring(useTransform(mx, [-0.5, 0.5], [-14, 14]), { stiffness: 60, damping: 20 });
   const onMove = (e) => mx.set(e.clientX / window.innerWidth - 0.5);
   return (
-    <div className="absolute inset-0 hidden lg:block" onMouseMove={onMove}>
-      <motion.div style={{ x }} initial={{ scale: 1.08, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 1.8, ease }} className="absolute inset-y-0 right-0 w-full lg:w-[66%]">
+    <div className="absolute inset-0 hidden xl:block" onMouseMove={onMove}>
+      <motion.div style={{ x }} initial={{ scale: 1.08, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 1.8, ease }} className="absolute inset-y-0 right-0 w-full xl:w-[58%]">
         <img
-          src={IMAGES.heroHat}
-          alt="Renegade Hats handcrafted distressed hat with peacock feather"
-          className="h-full w-full object-cover object-[60%_center]"
-          style={{ WebkitMaskImage: "linear-gradient(90deg, transparent 0%, #000 28%)", maskImage: "linear-gradient(90deg, transparent 0%, #000 28%)" }}
+          src={IMAGES.heroRenegade}
+          alt="The original black Renegade hat by Renegade Hats"
+          className="h-full w-full object-cover object-[50%_40%]"
+          style={{ WebkitMaskImage: "linear-gradient(90deg, transparent 0%, #000 8%)", maskImage: "linear-gradient(90deg, transparent 0%, #000 8%)" }}
           data-testid="hero-image"
         />
       </motion.div>
@@ -40,9 +40,9 @@ const HeroImage = () => {
 };
 
 const MobileHeroImage = () => (
-  <motion.div initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.4, ease }} className="relative aspect-[4/3] w-full overflow-hidden sm:aspect-[2/1] lg:hidden" data-testid="hero-image-mobile">
-    <img src={IMAGES.heroHatFull} alt="Renegade Hats handcrafted distressed hat with peacock feather" className="h-full w-full object-cover object-[52%_45%]" />
-    <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-[#0D0B08] via-[#0D0B08]/50 to-transparent" />
+  <motion.div initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.4, ease }} className="relative aspect-[2200/1350] w-full overflow-hidden sm:mx-auto sm:max-w-[760px] xl:hidden" data-testid="hero-image-mobile">
+    <img src={IMAGES.heroRenegade} alt="The original black Renegade hat by Renegade Hats" className="h-full w-full object-cover object-center" />
+    <div className="absolute inset-x-0 bottom-0 h-1/6 bg-gradient-to-t from-[#0D0B08] via-[#0D0B08]/50 to-transparent" />
   </motion.div>
 );
 
@@ -50,32 +50,32 @@ export const Hero = () => (
   <section className="tex-wood torn-edge relative overflow-hidden" data-testid="hero-section">
     <HeroImage />
     <MobileHeroImage />
-    <div className="relative z-10 mx-auto -mt-14 flex max-w-[1440px] flex-col px-5 pb-8 sm:-mt-10 sm:px-8 lg:mt-0 lg:min-h-[540px] lg:justify-center lg:px-12 lg:py-10">
-      <div className="max-w-[760px] text-center lg:text-left">
+    <div className="relative z-10 mx-auto -mt-3 flex max-w-[1440px] flex-col px-5 pb-8 sm:-mt-4 sm:px-8 xl:mt-0 xl:min-h-[540px] xl:justify-center xl:px-12 xl:py-10">
+      <div className="mx-auto w-full max-w-[760px] text-center xl:mx-0 xl:text-left">
         <h1 data-testid="hero-title">
           <span className="block overflow-hidden pb-2">
-            <motion.span initial={{ y: "110%" }} animate={{ y: 0 }} transition={{ duration: 1.1, delay: 0.2, ease: [0.76, 0, 0.24, 1] }} className="font-script block text-[2.05rem] leading-[1.1] text-[#E7D3B5] sm:text-6xl lg:whitespace-nowrap lg:text-[5.2rem]" style={{ textShadow: "0 4px 24px rgba(0,0,0,.7)" }}>
+            <motion.span initial={{ y: "110%" }} animate={{ y: 0 }} transition={{ duration: 1.1, delay: 0.2, ease: [0.76, 0, 0.24, 1] }} className="font-script block text-[2.05rem] leading-[1.1] text-[#E7D3B5] sm:text-6xl xl:whitespace-nowrap xl:text-[5.2rem]" style={{ textShadow: "0 4px 24px rgba(0,0,0,.7)" }}>
               More Than a Hat…
             </motion.span>
           </span>
           <span className="block overflow-hidden pb-1">
-            <motion.span initial={{ y: "110%" }} animate={{ y: 0 }} transition={{ duration: 1.1, delay: 0.38, ease: [0.76, 0, 0.24, 1] }} className="font-script block text-[1.28rem] uppercase leading-tight tracking-[0.05em] text-[#E7D3B5] sm:text-4xl lg:ml-8 lg:text-[3.2rem]">
+            <motion.span initial={{ y: "110%" }} animate={{ y: 0 }} transition={{ duration: 1.1, delay: 0.38, ease: [0.76, 0, 0.24, 1] }} className="font-script block text-[1.28rem] uppercase leading-tight tracking-[0.05em] text-[#E7D3B5] sm:text-4xl xl:ml-8 xl:text-[3.2rem]">
               It’s a State of Mind.
             </motion.span>
           </span>
         </h1>
-        <motion.div {...rise(0.7)} className="mx-auto mt-3 max-w-[260px] lg:mx-0 lg:ml-20 lg:mt-5 lg:max-w-[340px]">
+        <motion.div {...rise(0.7)} className="mx-auto mt-3 max-w-[260px] xl:mx-0 xl:ml-20 xl:mt-5 xl:max-w-[340px]">
           <SkullDivider />
         </motion.div>
-        <motion.p {...rise(0.85)} className="mt-3 text-[11px] font-medium uppercase tracking-[0.26em] text-[#EFE3CC] sm:text-base lg:ml-10 lg:mt-5 lg:tracking-[0.3em]" data-testid="hero-secondary-tagline">
+        <motion.p {...rise(0.85)} className="mt-3 text-[11px] font-medium uppercase tracking-[0.26em] text-[#EFE3CC] sm:text-base xl:ml-10 xl:mt-5 xl:tracking-[0.3em]" data-testid="hero-secondary-tagline">
           One of a Kind. Handcrafted. No Rules.
         </motion.p>
-        <motion.div {...rise(1)} className="mt-4 flex justify-center lg:ml-20 lg:mt-7 lg:justify-start">
+        <motion.div {...rise(1)} className="mt-4 flex justify-center xl:ml-20 xl:mt-7 xl:justify-start">
           <Link to="/shop" className="btn-primary group h-[50px] min-h-0 w-full max-w-[280px] whitespace-nowrap px-3 text-sm tracking-[0.14em] sm:h-auto sm:min-h-[48px] sm:w-auto sm:px-10 sm:text-base sm:tracking-[0.18em]" data-testid="hero-shop-cta">
             Shop Now <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
           </Link>
         </motion.div>
-        <motion.ul {...rise(1.15)} className="mx-auto mt-6 grid max-w-[360px] grid-cols-3 gap-2 sm:gap-6 lg:mx-0 lg:mt-10 lg:max-w-[460px]" data-testid="hero-benefits">
+        <motion.ul {...rise(1.15)} className="mx-auto mt-6 grid max-w-[360px] grid-cols-3 gap-2 sm:gap-6 xl:mx-0 xl:mt-10 xl:max-w-[460px]" data-testid="hero-benefits">
           {BENEFITS.map(({ icon: Icon, label }, i) => (
             <li key={i} className="flex flex-col items-center text-center" data-testid={`hero-benefit-${i}`}>
               <span className="flex h-9 w-9 items-center justify-center rounded-full border border-[#C87D53]/80 text-[#C87D53] sm:h-12 sm:w-12">

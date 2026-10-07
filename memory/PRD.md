@@ -19,6 +19,8 @@ Premium e-commerce website for handmade hat brand RENÉGADE HATS — one-of-a-ki
 - Tests: iteration 3 — backend 16/16, frontend all flows pass
 
 ## Notes
+- 2026-10-07: Hat Editor in admin (add/edit/delete hats, photo upload via Emergent object storage, Stripe price sync); checkout opens new tab when framed (editor preview); home hero now uses owner's real black Renegade photo (public/img/hero-renegade.jpg, from upload 74468af1); hero split layout only at xl, stacked below; Story text edits; Shipping & Returns page + links removed
+- Owner has uploaded real photos for all hats via admin; product data now lives in Mongo (seed only when empty)
 - Hat images are AI-generated PLACEHOLDERS based on reference image until owner uploads real photos
 - Social links point to instagram.com / facebook.com placeholders
 - Shipping/returns text is placeholder wording

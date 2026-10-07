@@ -2,6 +2,7 @@ import { IMG } from "../lib/api";
 
 export const IMAGES = {
   heroHat: "/img/hero-hat.jpg",
+  heroRenegade: "/img/hero-renegade.jpg",
   heroHatFull: IMG + "9b4445339774a4461392164e177dd0003cb29138866e59b2d745390a20c5c8a4.jpeg",
   heroHatWide: IMG + "3b341fe002aea5ff4abf2a86980be2793ca3f11cabcfff3cb2ffe3b6c3d4d833.jpeg",
   panelCustom: IMG + "992e0de01c48dd2fee70764df86dd492aea1b2cfb091036b3537f3b33e9cd6bc.jpeg",
@@ -42,7 +43,6 @@ export const FOOTER_LINKS = [
   { to: "/shop", label: "Shop", id: "shop" },
   { to: "/story", label: "About", id: "story" },
   { to: "/contact", label: "Contact", id: "contact" },
-  { to: "/shipping", label: "Shipping & Returns", id: "shipping" },
   { to: "/faq", label: "FAQs", id: "faq" },
   { to: "/privacy", label: "Privacy", id: "privacy" },
 ];
@@ -76,7 +76,7 @@ export const GALLERY = [
 
 export const FAQS = [
   { q: "Are the hats one of a kind?", a: "Yes. Every Renegade Hat is individually distressed, decorated and finished by hand. Even when two hats share a name or a style, no two are ever identical. When you buy one, it's the only one." },
-  { q: "Do you ship?", a: "Yes. We ship across Canada and to the United States. Every hat is packed carefully in a sturdy box so it arrives with its shape intact. See Shipping & Returns for details." },
+  { q: "Do you ship?", a: "Yes. We ship across Canada and to the United States. Every hat is packed carefully in a sturdy box so it arrives with its shape intact." },
   { q: "Where are Renegade Hats made?", a: "Every hat is made by hand in our small workshop in Powell River, British Columbia, Canada." },
   { q: "What happens if a hat sells out?", a: "Because each hat is one of a kind, once it sells it's gone for good and will be marked SOLD OUT. Keep an eye on the shop — new one-of-a-kind hats are added as they're finished." },
   { q: "How do I find my hat size?", a: "Measure around your head about a finger's width above your ears and eyebrows. Send us the measurement in centimetres or inches and we'll help you find the right fit." },

@@ -8,13 +8,13 @@ const CHAPTERS = [
     n: "I",
     title: "Born on the Edge",
     img: IMAGES.coast,
-    text: "Renegade Hats began in Powell River, British Columbia — a small town at the end of the road, where the forest meets the Pacific and people tend to do things their own way. It started with one hat, a torch, some old leather and a refusal to wear what everyone else was wearing.",
+    text: "Renegade Hats began in Powell River, British Columbia — a small town at the end of the road, where the forest meets the Pacific and people tend to do things their own way. One hat. A wild idea. A refusal to follow the pack.",
   },
   {
     n: "II",
     title: "Made by Hand. Every Time.",
     img: IMAGES.burn,
-    text: "Every hat is distressed, burned, sanded, shaped and decorated by hand in our small workshop. Feathers, conchos, bone, copper, turquoise, painted artwork — each piece is chosen for that one hat and no other. There are no production lines, no templates and no duplicates.",
+    text: "Every hat is distressed, burned, sanded, shaped and decorated by hand in our small workshop. Feathers, conchos, bone, copper, turquoise, artwork — each piece is chosen for that one hat and no other. There are no production lines, no templates and no duplicates.",
   },
   {
     n: "III",
