@@ -1,12 +1,10 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { toast } from "sonner";
 import { Hero } from "../components/Hero";
 import { useProducts } from "../hooks/useProducts";
-import { IMAGES } from "../data/content";
-import { api, formatCAD } from "../lib/api";
+import { IMAGES, POPUPS } from "../data/content";
+import { formatCAD } from "../lib/api";
 
 export const SectionTitle = ({ children, testId }) => (
   <div className="flex items-center justify-center gap-4 sm:gap-6" data-testid={testId}>
@@ -74,34 +72,15 @@ const Panel = ({ img, imgPos = "center", align = "right", children, testId, i })
 const PanelTitle = ({ children }) => <h3 className="font-rye text-[1.75rem] uppercase leading-none tracking-[0.06em] text-[#EFE3CC] sm:text-3xl">{children}</h3>;
 const PanelText = ({ children }) => <p className="mt-3 text-xs font-medium uppercase leading-relaxed tracking-[0.18em] text-[#E2D4BD]">{children}</p>;
 
-const Newsletter = () => {
-  const [email, setEmail] = useState("");
-  const [busy, setBusy] = useState(false);
-  const [joined, setJoined] = useState(false);
-  const submit = async (e) => {
-    e.preventDefault();
-    setBusy(true);
-    try {
-      await api.post("/newsletter", { email });
-      setJoined(true);
-      setEmail("");
-      toast.success("You're on the list.");
-    } catch {
-      toast.error("Please enter a valid email address.");
-    } finally {
-      setBusy(false);
-    }
-  };
-  if (joined) return <p className="font-script mt-5 text-2xl text-[#D9935F]" data-testid="newsletter-success">Welcome to the outfit.</p>;
-  return (
-    <form onSubmit={submit} className="mt-5 flex w-full max-w-[400px]" data-testid="newsletter-form">
-      <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Your email address" className="min-h-[48px] w-full min-w-0 border border-[#C87D53]/50 bg-[#0D0B08]/85 px-4 text-sm text-[#EFE3CC] outline-none placeholder:text-[#A3978C] focus:border-[#C87D53]" data-testid="newsletter-email-input" />
-      <button disabled={busy} className="btn-primary shrink-0 px-5 shadow-none" data-testid="newsletter-join-button">
-        Join <ArrowRight className="h-4 w-4" />
-      </button>
-    </form>
-  );
-};
+const PopupList = () => (
+  <ul className="mt-5 w-full max-w-[400px] space-y-2" data-testid="popups-list">
+    {POPUPS.map((e) => (
+      <li key={`${e.date}-${e.place}`} className="border-l-2 border-[#C87D53] pl-3 text-sm text-[#EFE3CC]">
+        <span className="font-semibold uppercase tracking-[0.14em]">{e.date}</span> · {e.place}
+      </li>
+    ))}
+  </ul>
+);
 
 const Promos = () => (
   <section className="tex-wood px-4 py-8 sm:px-8 lg:px-12" data-testid="promo-panels">
@@ -111,10 +90,10 @@ const Promos = () => (
         <PanelText>Handcrafted hats.<br />Real stories.</PanelText>
         <Link to="/story" className="btn-primary mt-5 px-5 text-sm" data-testid="promo-story-cta">Our Story <ArrowRight className="h-4 w-4" /></Link>
       </Panel>
-      <Panel i={1} img={IMAGES.panelTouch} imgPos="right center" align="left" testId="promo-newsletter">
-        <PanelTitle>Keep in Touch</PanelTitle>
-        <PanelText>Be the first to see new hats<br />and upcoming events.</PanelText>
-        <Newsletter />
+      <Panel i={1} img={IMAGES.panelTouch} imgPos="right center" align="left" testId="promo-popups">
+        <PanelTitle>Find Us Out There</PanelTitle>
+        <PanelText>Upcoming pop-ups, markets & places to find Renegade Hats in person.</PanelText>
+        <PopupList />
       </Panel>
     </div>
   </section>

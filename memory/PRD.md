@@ -19,6 +19,8 @@ Premium e-commerce website for handmade hat brand RENÉGADE HATS — one-of-a-ki
 - Tests: iteration 3 — backend 16/16, frontend all flows pass
 - 2026-10-07: Removed FAQ and Privacy pages and their routes. Nav = Home/Shop/About/Gallery/Contact. Footer = Shop/About/Contact + © line.
 - 2026-10-07: Removed Gallery page, route and nav link. Nav = Home/Shop/About/Contact.
+- 2026-10-07: Home "Keep in Touch" panel -> "Find Us Out There" (pop-ups). Newsletter form removed; empty POPUPS list in content.js for future listings. Hero image replacement awaiting user re-upload.
+
 
 
 

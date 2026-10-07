@@ -43,6 +43,9 @@ export const FOOTER_LINKS = [
   { to: "/contact", label: "Contact", id: "contact" },
 ];
 
+// Pop-up listings: add entries as { date: "...", place: "..." }
+export const POPUPS = [];
+
 export const SOCIALS = [
   { label: "Instagram", href: "https://instagram.com", id: "instagram" },
   { label: "Facebook", href: "https://facebook.com", id: "facebook" },
