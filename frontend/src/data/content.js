@@ -34,7 +34,6 @@ export const NAV = [
   { to: "/", label: "Home", id: "home", end: true },
   { to: "/shop", label: "Shop", id: "shop" },
   { to: "/story", label: "About", id: "story" },
-  { to: "/gallery", label: "Gallery", id: "gallery" },
   { to: "/contact", label: "Contact", id: "contact" },
 ];
 
@@ -42,33 +41,6 @@ export const FOOTER_LINKS = [
   { to: "/shop", label: "Shop", id: "shop" },
   { to: "/story", label: "About", id: "story" },
   { to: "/contact", label: "Contact", id: "contact" },
-];
-
-export const GALLERY = [
-  { src: IMAGES.heroHatWide, title: "Barn Light", tag: "Collection" },
-  { src: IMAGES.rShaman, title: "The Shaman", tag: "Collection" },
-  { src: IMAGES.rRed, title: "Renegade Red", tag: "Collection" },
-  { src: IMAGES.panelCustom, title: "Concho Detail", tag: "Details" },
-  { src: IMAGES.rMidnight, title: "Midnight Renegade", tag: "Collection" },
-  { src: IMAGES.panelStory, title: "Shaping by Hand", tag: "Workshop" },
-  { src: IMAGES.rOutlaw, title: "The Outlaw", tag: "Collection" },
-  { src: IMAGES.panelTouch, title: "Prairie Dusk", tag: "Worn" },
-  { src: IMAGES.rWanderer, title: "The Wanderer", tag: "Collection" },
-  { src: IMAGES.rRenegade, title: "The Renegade", tag: "Collection" },
-  { src: IMAGES.renegade, title: "The Renegade", tag: "Collection", tall: true },
-  { src: IMAGES.wall, title: "The Rack", tag: "Workshop" },
-  { src: IMAGES.musician, title: "Stage Ready", tag: "Worn", tall: true },
-  { src: IMAGES.detail, title: "Band Detail", tag: "Details" },
-  { src: IMAGES.red, title: "Renegade Red", tag: "Collection", tall: true },
-  { src: IMAGES.burn, title: "Fire & Felt", tag: "Workshop" },
-  { src: IMAGES.coast, title: "Pacific Wanderer", tag: "Worn", tall: true },
-  { src: IMAGES.jolly, title: "Jolly Roger", tag: "Details" },
-  { src: IMAGES.shaman, title: "The Shaman", tag: "Collection", tall: true },
-  { src: IMAGES.midnight, title: "Midnight Renegade", tag: "Collection", tall: true },
-  { src: IMAGES.workshop, title: "The Bench", tag: "Workshop" },
-  { src: IMAGES.outlaw, title: "The Outlaw", tag: "Collection", tall: true },
-  { src: IMAGES.wanderer, title: "The Wanderer", tag: "Collection", tall: true },
-  { src: IMAGES.hero, title: "Dusk Rider", tag: "Worn" },
 ];
 
 export const SOCIALS = [

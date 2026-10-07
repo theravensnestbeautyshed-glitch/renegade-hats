@@ -18,6 +18,8 @@ Premium e-commerce website for handmade hat brand RENÉGADE HATS — one-of-a-ki
 - To add a hat: add an entry to backend/catalog.py HATS (slug, name, price, order, subtitle, tagline, story, size, material, colour, hatband, handmade, description, details, images) then run setup_stripe.py and restart backend
 - Tests: iteration 3 — backend 16/16, frontend all flows pass
 - 2026-10-07: Removed FAQ and Privacy pages and their routes. Nav = Home/Shop/About/Gallery/Contact. Footer = Shop/About/Contact + © line.
+- 2026-10-07: Removed Gallery page, route and nav link. Nav = Home/Shop/About/Contact.
+
 
 
 ## Notes
