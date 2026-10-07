@@ -7,7 +7,8 @@ const CHAPTERS = [
   {
     n: "I",
     title: "Born on the Edge",
-    img: IMAGES.coast,
+    img: "/img/story-denim.jpg",
+    pos: "center 30%",
     text: "Renegade Hats began in Powell River, British Columbia — a small town at the end of the road, where the forest meets the Pacific and people tend to do things their own way. One hat. A wild idea. A refusal to follow the pack.",
   },
   {
@@ -20,7 +21,8 @@ const CHAPTERS = [
   {
     n: "III",
     title: "For the Ones Who Don't Fit",
-    img: IMAGES.musician,
+    img: "/img/story-gitta.jpg",
+    pos: "30% 5%",
     text: "Our hats are made for rebels, rule breakers, musicians, wanderers and free spirits — people who don't want ordinary. A Renegade Hat isn't an accessory. It's a statement about who you are and how you move through the world.",
   },
 ];
