@@ -20,6 +20,8 @@ Premium e-commerce website for handmade hat brand RENÉGADE HATS — one-of-a-ki
 - 2026-10-07: Removed FAQ and Privacy pages and their routes. Nav = Home/Shop/About/Gallery/Contact. Footer = Shop/About/Contact + © line.
 - 2026-10-07: Removed Gallery page, route and nav link. Nav = Home/Shop/About/Contact.
 - 2026-10-07: Home "Keep in Touch" panel -> "Find Us Out There" (pop-ups). Newsletter form removed; empty POPUPS list in content.js for future listings. Hero image replaced with user upload IMG_6669.webp (/img/hero-6669.webp, 2000x1125).
+- 2026-10-07: About page "Made by Hand. Every Time." photo -> user's Renegade Hats sign image (/img/made-by-hand-sign.jpg, framed on the sign).
+
 
 
 

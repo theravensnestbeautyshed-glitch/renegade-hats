@@ -13,7 +13,8 @@ const CHAPTERS = [
   {
     n: "II",
     title: "Made by Hand. Every Time.",
-    img: IMAGES.burn,
+    img: "/img/made-by-hand-sign.jpg",
+    pos: "center 85%",
     text: "Every hat is distressed, burned, sanded, shaped and decorated by hand in our small workshop. Feathers, conchos, bone, copper, turquoise, artwork — each piece is chosen for that one hat and no other. There are no production lines, no templates and no duplicates.",
   },
   {
@@ -33,7 +34,7 @@ export default function Story() {
           <div key={c.n} className="grid items-center gap-10 lg:grid-cols-12 lg:gap-16" data-testid={`story-chapter-${i}`}>
             <Reveal className={`lg:col-span-6 ${i % 2 ? "lg:order-2" : ""}`}>
               <div className="notch spotlight aspect-[4/5] overflow-hidden sm:aspect-[4/3]">
-                <img src={c.img} alt={c.title} className="h-full w-full object-cover" />
+                <img src={c.img} alt={c.title} className="h-full w-full object-cover" style={c.pos ? { objectPosition: c.pos } : undefined} />
               </div>
             </Reveal>
             <Reveal delay={0.12} className="lg:col-span-6">
