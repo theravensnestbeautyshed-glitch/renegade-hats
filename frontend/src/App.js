@@ -10,10 +10,8 @@ import Shop from "./pages/Shop";
 import Product from "./pages/Product";
 import Gallery from "./pages/Gallery";
 import Story from "./pages/Story";
-import FAQ from "./pages/FAQ";
 import Contact from "./pages/Contact";
 import Admin from "./pages/Admin";
-import Privacy from "./pages/Privacy";
 import { PaymentSuccess, PaymentCancel } from "./pages/Payment";
 
 const Layout = () => (
@@ -39,9 +37,7 @@ function App() {
             <Route path="/shop/:slug" element={<Product />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/story" element={<Story />} />
-            <Route path="/faq" element={<FAQ />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/privacy" element={<Privacy />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/payment/success" element={<PaymentSuccess />} />
             <Route path="/payment/cancel" element={<PaymentCancel />} />

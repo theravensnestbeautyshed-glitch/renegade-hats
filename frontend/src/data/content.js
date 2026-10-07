@@ -36,15 +36,12 @@ export const NAV = [
   { to: "/story", label: "About", id: "story" },
   { to: "/gallery", label: "Gallery", id: "gallery" },
   { to: "/contact", label: "Contact", id: "contact" },
-  { to: "/faq", label: "FAQ", id: "faq" },
 ];
 
 export const FOOTER_LINKS = [
   { to: "/shop", label: "Shop", id: "shop" },
   { to: "/story", label: "About", id: "story" },
   { to: "/contact", label: "Contact", id: "contact" },
-  { to: "/faq", label: "FAQs", id: "faq" },
-  { to: "/privacy", label: "Privacy", id: "privacy" },
 ];
 
 export const GALLERY = [
@@ -72,14 +69,6 @@ export const GALLERY = [
   { src: IMAGES.outlaw, title: "The Outlaw", tag: "Collection", tall: true },
   { src: IMAGES.wanderer, title: "The Wanderer", tag: "Collection", tall: true },
   { src: IMAGES.hero, title: "Dusk Rider", tag: "Worn" },
-];
-
-export const FAQS = [
-  { q: "Are the hats one of a kind?", a: "Yes. Every Renegade Hat is individually distressed, decorated and finished by hand. Even when two hats share a name or a style, no two are ever identical. When you buy one, it's the only one." },
-  { q: "Do you ship?", a: "Yes. We ship across Canada and to the United States. Every hat is packed carefully in a sturdy box so it arrives with its shape intact." },
-  { q: "Where are Renegade Hats made?", a: "Every hat is made by hand in our small workshop in Powell River, British Columbia, Canada." },
-  { q: "What happens if a hat sells out?", a: "Because each hat is one of a kind, once it sells it's gone for good and will be marked SOLD OUT. Keep an eye on the shop — new one-of-a-kind hats are added as they're finished." },
-  { q: "How do I find my hat size?", a: "Measure around your head about a finger's width above your ears and eyebrows. Send us the measurement in centimetres or inches and we'll help you find the right fit." },
 ];
 
 export const SOCIALS = [
