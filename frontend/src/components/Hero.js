@@ -28,8 +28,8 @@ const HeroImage = () => {
       <motion.div style={{ x }} initial={{ scale: 1.08, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 1.8, ease }} className="absolute inset-y-0 right-0 w-full xl:w-[58%]">
         <img
           src={IMAGES.heroRenegade}
-          alt="The original black Renegade hat by Renegade Hats"
-          className="h-full w-full object-cover object-[50%_40%]"
+          alt="Renegade Hats"
+          className="h-full w-full object-cover object-center"
           style={{ WebkitMaskImage: "linear-gradient(90deg, transparent 0%, #000 8%)", maskImage: "linear-gradient(90deg, transparent 0%, #000 8%)" }}
           data-testid="hero-image"
         />
@@ -40,8 +40,8 @@ const HeroImage = () => {
 };
 
 const MobileHeroImage = () => (
-  <motion.div initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.4, ease }} className="relative aspect-[2200/1350] w-full overflow-hidden sm:mx-auto sm:max-w-[760px] xl:hidden" data-testid="hero-image-mobile">
-    <img src={IMAGES.heroRenegade} alt="The original black Renegade hat by Renegade Hats" className="h-full w-full object-cover object-center" />
+  <motion.div initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.4, ease }} className="relative aspect-[336/192] w-full overflow-hidden sm:mx-auto sm:max-w-[760px] xl:hidden" data-testid="hero-image-mobile">
+    <img src={IMAGES.heroRenegade} alt="Renegade Hats" className="h-full w-full object-cover object-center" />
     <div className="absolute inset-x-0 bottom-0 h-1/6 bg-gradient-to-t from-[#0D0B08] via-[#0D0B08]/50 to-transparent" />
   </motion.div>
 );
