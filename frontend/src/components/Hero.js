@@ -40,7 +40,7 @@ const HeroImage = () => {
 };
 
 const MobileHeroImage = () => (
-  <motion.div initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.4, ease }} className="relative aspect-[336/192] w-full overflow-hidden sm:mx-auto sm:max-w-[760px] xl:hidden" data-testid="hero-image-mobile">
+  <motion.div initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.4, ease }} className="relative aspect-[2000/1125] w-full overflow-hidden sm:mx-auto sm:max-w-[760px] xl:hidden" data-testid="hero-image-mobile">
     <img src={IMAGES.heroRenegade} alt="Renegade Hats" className="h-full w-full object-cover object-center" />
     <div className="absolute inset-x-0 bottom-0 h-1/6 bg-gradient-to-t from-[#0D0B08] via-[#0D0B08]/50 to-transparent" />
   </motion.div>

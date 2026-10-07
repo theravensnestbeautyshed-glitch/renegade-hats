@@ -2,7 +2,7 @@ import { IMG } from "../lib/api";
 
 export const IMAGES = {
   heroHat: "/img/hero-hat.jpg",
-  heroRenegade: "/img/hero-new.png",
+  heroRenegade: "/img/hero-6669.webp",
   heroHatFull: IMG + "9b4445339774a4461392164e177dd0003cb29138866e59b2d745390a20c5c8a4.jpeg",
   heroHatWide: IMG + "3b341fe002aea5ff4abf2a86980be2793ca3f11cabcfff3cb2ffe3b6c3d4d833.jpeg",
   panelCustom: IMG + "992e0de01c48dd2fee70764df86dd492aea1b2cfb091036b3537f3b33e9cd6bc.jpeg",
