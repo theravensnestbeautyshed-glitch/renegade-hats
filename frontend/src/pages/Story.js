@@ -20,10 +20,11 @@ const CHAPTERS = [
   },
   {
     n: "III",
-    title: "For the Ones Who Don't Fit",
+    title: "For the Rule Breakers",
     img: "/img/story-gitta.jpg",
     pos: "30% 5%",
-    text: "Our hats are made for rebels, rule breakers, musicians, wanderers and free spirits — people who don't want ordinary. A Renegade Hat isn't an accessory. It's a statement about who you are and how you move through the world.",
+    text: "Handcrafted by lady renegade Gitta May Nielsen — the maker behind every one-of-a-kind Renegade Hat. These hats are made for rebels, the ones who don't fit, musicians, wanderers and free spirits — people who don't want ordinary. A Renegade Hat isn't an accessory. It's a statement about who you are and how you move through the world.",
+    note: ""
   },
 ];
 
@@ -43,6 +44,7 @@ export default function Story() {
               <span className="font-rye text-7xl text-[#C87D53]/40">{c.n}</span>
               <h2 className="font-cinzel mt-2 text-3xl font-black uppercase leading-tight sm:text-4xl lg:text-5xl">{c.title}</h2>
               <p className="mt-6 max-w-xl text-base leading-relaxed text-[#F2EADB]/85 md:text-lg">{c.text}</p>
+              {c.note && <p className="font-script mt-5 max-w-xl text-xl leading-snug text-[#D9935F] md:text-2xl" data-testid="story-maker-note">{c.note}</p>}
             </Reveal>
           </div>
         ))}

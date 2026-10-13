@@ -54,7 +54,7 @@ const FeaturedHats = () => {
   );
 };
 
-const Panel = ({ img, imgPos = "center", align = "right", children, testId, i }) => (
+const Panel = ({ img, imgPos = "center", align = "right", children, testId, i, to }) => (
   <motion.div
     initial={{ opacity: 0, y: 24 }}
     whileInView={{ opacity: 1, y: 0 }}
@@ -66,6 +66,7 @@ const Panel = ({ img, imgPos = "center", align = "right", children, testId, i })
     <img src={img} alt="" className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.6s] group-hover:scale-105" style={{ objectPosition: imgPos }} />
     <div className={`absolute inset-0 ${align === "right" ? "bg-gradient-to-r from-[#0D0B08]/30 via-[#0D0B08]/60 to-[#0D0B08]/90" : "bg-gradient-to-r from-[#0D0B08]/90 via-[#0D0B08]/65 to-[#0D0B08]/10"}`} />
     <div className={`relative flex h-full flex-col justify-center p-6 sm:p-7 ${align === "right" ? "items-start sm:ml-[42%]" : "items-start"}`}>{children}</div>
+    {to && <Link to={to} className="absolute inset-0 z-10" aria-label="See upcoming appearances" data-testid={`${testId}-link`} />}
   </motion.div>
 );
 
@@ -75,8 +76,8 @@ const PanelText = ({ children }) => <p className="mt-3 text-xs font-medium upper
 const PopupList = () => (
   <ul className="mt-5 w-full max-w-[400px] space-y-2" data-testid="popups-list">
     {POPUPS.map((e) => (
-      <li key={`${e.date}-${e.place}`} className="border-l-2 border-[#C87D53] pl-3 text-sm text-[#EFE3CC]">
-        <span className="font-semibold uppercase tracking-[0.14em]">{e.date}</span> · {e.place}
+      <li key={e.id} className="border-l-2 border-[#C87D53] pl-3 text-sm text-[#EFE3CC]">
+        <span className="font-semibold uppercase tracking-[0.14em]">{e.date}</span> · {e.title}
       </li>
     ))}
   </ul>
@@ -90,10 +91,11 @@ const Promos = () => (
         <PanelText>Handcrafted hats.<br />Real stories.</PanelText>
         <Link to="/story" className="btn-primary mt-5 px-5 text-sm" data-testid="promo-story-cta">Our Story <ArrowRight className="h-4 w-4" /></Link>
       </Panel>
-      <Panel i={1} img={IMAGES.panelTouch} imgPos="right center" align="left" testId="promo-popups">
+      <Panel i={1} img={IMAGES.panelTouch} imgPos="right center" align="left" testId="promo-popups" to="/events">
         <PanelTitle>Find Us Out There</PanelTitle>
         <PanelText>Upcoming pop-ups, markets & places to find Renegade Hats in person.</PanelText>
         <PopupList />
+        <span className="mt-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#D9935F] transition-colors group-hover:text-[#EFE3CC]">See Appearances <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" /></span>
       </Panel>
     </div>
   </section>

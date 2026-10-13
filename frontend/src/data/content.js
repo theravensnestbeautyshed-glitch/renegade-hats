@@ -43,8 +43,15 @@ export const FOOTER_LINKS = [
   { to: "/contact", label: "Contact", id: "contact" },
 ];
 
-// Pop-up listings: add entries as { date: "...", place: "..." }
-export const POPUPS = [];
+export const POPUPS = [
+  {
+    id: "soapy-dragon-2026",
+    title: "Renegade Hats at The Soapy Dragon",
+    date: "Nov 17 – Dec 24, 2026",
+    place: "Town Centre Mall, Powell River, British Columbia, Canada",
+    text: "I'll be a vendor at The Soapy Dragon from November 17 to December 24, 2026.",
+  },
+];
 
 export const SOCIALS = [
   { label: "Instagram", href: "https://instagram.com", id: "instagram" },

@@ -9,6 +9,7 @@ import Home from "./pages/Home";
 import Shop from "./pages/Shop";
 import Product from "./pages/Product";
 import Story from "./pages/Story";
+import Events from "./pages/Events";
 import Contact from "./pages/Contact";
 import Admin from "./pages/Admin";
 import { PaymentSuccess, PaymentCancel } from "./pages/Payment";
@@ -35,6 +36,7 @@ function App() {
             <Route path="/shop" element={<Shop />} />
             <Route path="/shop/:slug" element={<Product />} />
             <Route path="/story" element={<Story />} />
+            <Route path="/events" element={<Events />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/payment/success" element={<PaymentSuccess />} />

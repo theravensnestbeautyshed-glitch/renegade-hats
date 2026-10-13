@@ -55,12 +55,12 @@ export const Hero = () => (
         <h1 data-testid="hero-title">
           <span className="block overflow-hidden pb-2">
             <motion.span initial={{ y: "110%" }} animate={{ y: 0 }} transition={{ duration: 1.1, delay: 0.2, ease: [0.76, 0, 0.24, 1] }} className="font-script block text-[2.05rem] leading-[1.1] text-[#E7D3B5] sm:text-6xl xl:whitespace-nowrap xl:text-[5.2rem]" style={{ textShadow: "0 4px 24px rgba(0,0,0,.7)" }}>
-              More Than a Hat…
+              A Little Rebellion
             </motion.span>
           </span>
           <span className="block overflow-hidden pb-1">
             <motion.span initial={{ y: "110%" }} animate={{ y: 0 }} transition={{ duration: 1.1, delay: 0.38, ease: [0.76, 0, 0.24, 1] }} className="font-script block text-[1.28rem] uppercase leading-tight tracking-[0.05em] text-[#E7D3B5] sm:text-4xl xl:ml-8 xl:text-[3.2rem]">
-              It’s a State of Mind.
+              Looks Good on You.
             </motion.span>
           </span>
         </h1>

@@ -22,6 +22,8 @@ Premium e-commerce website for handmade hat brand RENÉGADE HATS — one-of-a-ki
 - 2026-10-07: Home "Keep in Touch" panel -> "Find Us Out There" (pop-ups). Newsletter form removed; empty POPUPS list in content.js for future listings. Hero image replaced with user upload IMG_6669.webp (/img/hero-6669.webp, 2000x1125).
 - 2026-10-07: About page "Made by Hand. Every Time." photo -> user's Renegade Hats sign image (/img/made-by-hand-sign.jpg, framed on the sign).
 - 2026-10-07: About page chapters I and III photos -> user's denim-outfit woman (/img/story-denim.jpg) and Gitta musician (/img/story-gitta.jpg).
+- 2026-10-13: Soapy Dragon event added (POPUPS in content.js); "Find Us Out There" panel now links to new /events page. Hero headline -> "A Little Rebellion / Looks Good on You."
+
 
 
 
