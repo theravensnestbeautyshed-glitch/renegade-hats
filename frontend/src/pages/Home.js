@@ -86,7 +86,7 @@ const PopupList = () => (
 const Promos = () => (
   <section className="tex-wood px-4 py-8 sm:px-8 lg:px-12" data-testid="promo-panels">
     <div className="mx-auto grid max-w-[1440px] gap-4 lg:grid-cols-2">
-      <Panel i={0} img={IMAGES.panelStory} imgPos="center" testId="promo-story">
+      <Panel i={0} img="/img/story-panel-hands.jpg" imgPos="center 35%" testId="promo-story">
         <PanelTitle>The Story</PanelTitle>
         <PanelText>Handcrafted hats.<br />Real stories.</PanelText>
         <Link to="/story" className="btn-primary mt-5 px-5 text-sm" data-testid="promo-story-cta">Our Story <ArrowRight className="h-4 w-4" /></Link>
