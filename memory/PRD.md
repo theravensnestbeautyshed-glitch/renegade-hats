@@ -27,6 +27,8 @@ Premium e-commerce website for handmade hat brand RENÉGADE HATS — one-of-a-ki
 - 2026-10-20: Homepage "The Story" promo panel image -> user's hands-shaping-hat photo (/img/story-panel-hands.jpg). Shop page banner (IMAGES.panelStory) unchanged.
 - 2026-10-20: Social share metadata in public/index.html: title "Renegade Hats", new description, og:* + twitter:* using hero image (customer-assets IMG_6669.webp, 2000x1125). No og:url/canonical (production domain not confirmed).
 - 2026-10-20: Removed all shipping references: product page "Ships across Canada & the U.S." line, cart "Shipping &" wording, payment success "shipping details" clause, Stripe checkout shipping address collection (CA/US). No shipping text in DB hat data.
+- 2026-10-20: Cloudflare "Module not found" root cause: legacy-peer-deps + npm hoisted ajv@6 while ajv-keywords@5 (terser/schema-utils) needs ajv@8 -> added devDependency ajv ^8.17.1. Verified clean `npm install` + `CI=true npm run build` passes on a fresh copy of the repo with current code.
+
 
 
 
