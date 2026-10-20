@@ -25,6 +25,8 @@ Premium e-commerce website for handmade hat brand RENÉGADE HATS — one-of-a-ki
 - 2026-10-13: Soapy Dragon event added (POPUPS in content.js); "Find Us Out There" panel now links to new /events page. Hero headline -> "A Little Rebellion / Looks Good on You."
 - 2026-10-19: Cloudflare Pages build fix: date-fns 4.1.0 -> 3.6.0 (react-day-picker 8.10.1 peer), added frontend/.npmrc legacy-peer-deps=true (react-day-picker peer react<=18 vs React 19). Production build passes.
 - 2026-10-20: Homepage "The Story" promo panel image -> user's hands-shaping-hat photo (/img/story-panel-hands.jpg). Shop page banner (IMAGES.panelStory) unchanged.
+- 2026-10-20: Social share metadata in public/index.html: title "Renegade Hats", new description, og:* + twitter:* using hero image (customer-assets IMG_6669.webp, 2000x1125). No og:url/canonical (production domain not confirmed).
+
 
 
 
