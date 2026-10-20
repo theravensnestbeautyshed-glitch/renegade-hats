@@ -219,7 +219,6 @@ async def checkout(req: CheckoutIn):
         line_items=line_items, mode="payment",
         success_url=f"{req.origin_url}/payment/success?session_id={{CHECKOUT_SESSION_ID}}",
         cancel_url=f"{req.origin_url}/payment/cancel",
-        shipping_address_collection={"allowed_countries": ["CA", "US"]},
         metadata={"slugs": ",".join(slugs)},
         expires_at=int(time.time()) + RESERVE_SECONDS,
     )

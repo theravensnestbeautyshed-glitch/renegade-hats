@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowLeft, ArrowRight, Truck } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { api, formatCAD } from "../lib/api";
 import { useCart } from "../context/CartContext";
 import { useProducts } from "../hooks/useProducts";
@@ -109,9 +109,6 @@ const Info = ({ p }) => (
     <div className="mt-7">
       <ClaimButton p={p} />
     </div>
-    <p className="mt-4 flex flex-wrap items-center gap-2 text-xs text-[#B9AC9C]">
-      <Truck className="h-4 w-4 text-[#C87D53]" /> Ships across Canada & the U.S.
-    </p>
   </div>
 );
 

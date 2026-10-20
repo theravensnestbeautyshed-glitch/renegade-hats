@@ -47,7 +47,7 @@ export function PaymentSuccess() {
 
   const copy = {
     checking: ["Confirming…", "Hold tight while we confirm your payment."],
-    paid: ["It's Yours.", "Payment confirmed. Your one-of-a-kind Renegade Hat is now spoken for — we'll email you shipping details shortly."],
+    paid: ["It's Yours.", "Payment confirmed. Your one-of-a-kind Renegade Hat is now spoken for."],
     pending: ["Almost There", "Your payment is still processing. You'll receive a confirmation email once it's complete."],
     error: ["Something Went Sideways", "We couldn't confirm this payment. If you were charged, please contact us."],
   }[state];

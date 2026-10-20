@@ -102,7 +102,7 @@ export const CartDrawer = () => {
               <span className="font-caslon font-bold uppercase tracking-[0.14em]">Subtotal</span>
               <span className="font-caslon font-bold text-[#D9935F]" data-testid="cart-subtotal">{formatCAD(total)}</span>
             </div>
-            <p className="mb-5 text-xs text-[#B9AC9C]">Shipping & taxes calculated at checkout.</p>
+            <p className="mb-5 text-xs text-[#B9AC9C]">Taxes calculated at checkout.</p>
             {unavailable.length > 0 && <p className="mb-3 text-xs text-[#e0573f]" data-testid="cart-sold-warning">Remove sold hats to continue.</p>}
             <button onClick={checkout} disabled={loading || unavailable.length > 0} className="btn-primary h-[56px] w-full" data-testid="cart-checkout-button">
               <Lock className="h-4 w-4" /> {loading ? "Opening checkout…" : "Checkout"}
