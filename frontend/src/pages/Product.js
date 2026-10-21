@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { api, formatCAD } from "../lib/api";
+import { api, formatCAD, STATIC_CATALOG } from "../lib/api";
+import CATALOG from "../data/catalog.json";
 import { useCart } from "../context/CartContext";
 import { useProducts } from "../hooks/useProducts";
 import { FavButton } from "../components/FavButton";
@@ -86,6 +87,12 @@ const ClaimButton = ({ p }) => {
         Claimed — In Your Cart <ArrowRight className="h-4 w-4" />
       </button>
     );
+  if (STATIC_CATALOG)
+    return (
+      <Link to="/contact" className="btn-primary group h-[60px] w-full text-lg sm:text-xl" data-testid="product-enquire">
+        Enquire About This Hat <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+      </Link>
+    );
   return (
     <button onClick={() => add(p)} className="btn-primary group h-[60px] w-full text-lg sm:text-xl" data-testid="product-add-to-cart">
       Claim This Renegade <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
@@ -167,6 +174,12 @@ export default function Product() {
     let alive = true;
     setP(null);
     setError(false);
+    if (STATIC_CATALOG) {
+      const hat = CATALOG.find((x) => x.slug === slug);
+      if (hat) setP(hat);
+      else setError(true);
+      return undefined;
+    }
     api.get(`/products/${slug}`).then((r) => alive && setP(r.data)).catch(() => alive && setError(true));
     return () => {
       alive = false;

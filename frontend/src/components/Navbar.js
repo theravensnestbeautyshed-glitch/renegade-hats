@@ -6,6 +6,7 @@ import { Dialog, DialogContent, DialogTitle, DialogDescription } from "./ui/dial
 import { LogoMark, Wordmark } from "./Logo";
 import { NAV } from "../data/content";
 import { useCart } from "../context/CartContext";
+import { STATIC_CATALOG } from "../lib/api";
 import { useProducts } from "../hooks/useProducts";
 import { formatCAD } from "../lib/api";
 
@@ -95,12 +96,12 @@ export const Navbar = () => {
           <IconBtn className="hidden sm:flex" onClick={() => nav("/admin")} data-testid="nav-account-button" aria-label="Account">
             <User className="h-[22px] w-[22px]" strokeWidth={1.5} />
           </IconBtn>
-          <IconBtn onClick={() => setOpen(true)} data-testid="nav-cart-button" aria-label="Open cart">
+          {!STATIC_CATALOG && <IconBtn onClick={() => setOpen(true)} data-testid="nav-cart-button" aria-label="Open cart">
             <ShoppingCart className="h-[22px] w-[22px]" strokeWidth={1.5} />
             <span className="absolute right-0.5 top-1 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-[#EFE3CC] px-1 text-[10px] font-bold text-[#0D0B08]" data-testid="nav-cart-count">
               {items.length}
             </span>
-          </IconBtn>
+          </IconBtn>}
           <IconBtn className="xl:hidden" onClick={() => setMobile((m) => !m)} data-testid="nav-mobile-toggle" aria-label="Toggle menu">
             {mobile ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </IconBtn>

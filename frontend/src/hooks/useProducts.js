@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import { api } from "../lib/api";
+import { api, STATIC_CATALOG } from "../lib/api";
+import CATALOG from "../data/catalog.json";
 
 export const useProducts = () => {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [products, setProducts] = useState(STATIC_CATALOG ? CATALOG : []);
+  const [loading, setLoading] = useState(!STATIC_CATALOG);
   useEffect(() => {
+    if (STATIC_CATALOG) return undefined;
     let alive = true;
     api
       .get("/products")

@@ -28,6 +28,8 @@ Premium e-commerce website for handmade hat brand RENÉGADE HATS — one-of-a-ki
 - 2026-10-20: Social share metadata in public/index.html: title "Renegade Hats", new description, og:* + twitter:* using hero image (customer-assets IMG_6669.webp, 2000x1125). No og:url/canonical (production domain not confirmed).
 - 2026-10-20: Removed all shipping references: product page "Ships across Canada & the U.S." line, cart "Shipping &" wording, payment success "shipping details" clause, Stripe checkout shipping address collection (CA/US). No shipping text in DB hat data.
 - 2026-10-20: Cloudflare "Module not found" root cause: legacy-peer-deps + npm hoisted ajv@6 while ajv-keywords@5 (terser/schema-utils) needs ajv@8 -> added devDependency ajv ^8.17.1. Verified clean `npm install` + `CI=true npm run build` passes on a fresh copy of the repo with current code.
+- 2026-10-21: Cloudflare "0 hats" fix. Cause: no backend on Cloudflare (REACT_APP_BACKEND_URL unset -> /api/products returns index.html) and hat photos live in backend object storage. Added static catalogue mode (STATIC_CATALOG = no REACT_APP_BACKEND_URL): src/data/catalog.json + public/img/hats/* (42 photos, exported via scripts/export_static_catalog.py from preview DB). Static mode: hats from JSON, "Enquire About This Hat" -> /contact, cart icon/buttons hidden. Emergent site unchanged (backend + checkout). Contact form still needs backend on Cloudflare (pending user email choice). Re-run export after Back Room edits.
+
 
 
 

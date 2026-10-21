@@ -5,7 +5,7 @@ import { useProducts } from "../hooks/useProducts";
 import { useCart } from "../context/CartContext";
 import { SkullDivider } from "../components/Logo";
 import { IMAGES } from "../data/content";
-import { formatCAD } from "../lib/api";
+import { formatCAD, STATIC_CATALOG } from "../lib/api";
 
 const ShopCard = ({ p, i }) => {
   const { add, has } = useCart();
@@ -43,7 +43,7 @@ const ShopCard = ({ p, i }) => {
           <Link to={`/shop/${p.slug}`} className="btn-ghost min-h-[44px] min-w-0 flex-1 gap-1 whitespace-nowrap px-1.5 text-[11px] tracking-[0.1em] sm:gap-1.5 sm:px-2 sm:tracking-[0.14em]" data-testid={`product-view-button-${p.slug}`}>
             View Hat <ArrowRight className="h-3.5 w-3.5" />
           </Link>
-          <button
+          {!STATIC_CATALOG && <button
             onClick={() => add(p)}
             disabled={p.sold || inCart}
             aria-label={p.sold ? "Sold out" : inCart ? "In cart" : "Add to cart"}
@@ -52,7 +52,7 @@ const ShopCard = ({ p, i }) => {
             data-testid={`product-add-button-${p.slug}`}
           >
             <ShoppingCart className="h-4 w-4" />
-          </button>
+          </button>}
         </div>
       </div>
     </motion.article>
